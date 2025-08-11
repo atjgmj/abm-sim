@@ -206,8 +206,14 @@ class CommunicationModel(Model):
     
     def run(self) -> Dict[str, Any]:
         """Run the simulation for specified steps."""
-        for _ in range(self.steps):
+        print(f"Starting simulation with {len(self.schedule.agents)} agents for {self.steps} steps")
+        
+        for step in range(self.steps):
+            if step % 10 == 0:  # Log every 10 steps
+                print(f"Simulation step {step}/{self.steps}")
             self.step()
+        
+        print("Simulation completed, collecting data...")
         
         # Extract data
         model_data = self.datacollector.get_model_vars_dataframe()

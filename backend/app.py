@@ -236,10 +236,17 @@ async def run_simulation(run_id: str, scenario: ScenarioRequest) -> None:
             
             print(f"Model created, running simulation...")
             
-            # Run simulation
-            results = model.run()
-            all_results.append(results)
-            print(f"Repetition {rep + 1} completed")
+            # Run simulation with timeout (5 minutes per repetition)
+            try:
+                loop = asyncio.get_event_loop()
+                results = await asyncio.wait_for(
+                    loop.run_in_executor(executor, model.run),
+                    timeout=300  # 5 minute timeout per repetition
+                )
+                all_results.append(results)
+                print(f"Repetition {rep + 1} completed")
+            except asyncio.TimeoutError:
+                raise Exception(f"Simulation repetition {rep + 1} timed out after 5 minutes")
         
         store.update_run_status(run_id, RunStatus.RUNNING, 0.95, "Aggregating results...")
         
