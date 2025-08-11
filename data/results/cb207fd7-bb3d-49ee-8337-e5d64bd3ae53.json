@@ -1,0 +1,1557 @@
+{
+  "series": [
+    {
+      "day": 0,
+      "metric": "awareness",
+      "value": 0
+    },
+    {
+      "day": 0,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 0,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 0,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 0,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 1,
+      "metric": "awareness",
+      "value": 7
+    },
+    {
+      "day": 1,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 1,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 1,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 1,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 2,
+      "metric": "awareness",
+      "value": 15
+    },
+    {
+      "day": 2,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 2,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 2,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 2,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 3,
+      "metric": "awareness",
+      "value": 27
+    },
+    {
+      "day": 3,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 3,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 3,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 3,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 4,
+      "metric": "awareness",
+      "value": 33
+    },
+    {
+      "day": 4,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 4,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 4,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 4,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 5,
+      "metric": "awareness",
+      "value": 43
+    },
+    {
+      "day": 5,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 5,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 5,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 5,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 6,
+      "metric": "awareness",
+      "value": 49
+    },
+    {
+      "day": 6,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 6,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 6,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 6,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 7,
+      "metric": "awareness",
+      "value": 59
+    },
+    {
+      "day": 7,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 7,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 7,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 7,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 8,
+      "metric": "awareness",
+      "value": 66
+    },
+    {
+      "day": 8,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 8,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 8,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 8,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 9,
+      "metric": "awareness",
+      "value": 70
+    },
+    {
+      "day": 9,
+      "metric": "interest",
+      "value": 0
+    },
+    {
+      "day": 9,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 9,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 9,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 10,
+      "metric": "awareness",
+      "value": 80
+    },
+    {
+      "day": 10,
+      "metric": "interest",
+      "value": 1
+    },
+    {
+      "day": 10,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 10,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 10,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 11,
+      "metric": "awareness",
+      "value": 89
+    },
+    {
+      "day": 11,
+      "metric": "interest",
+      "value": 1
+    },
+    {
+      "day": 11,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 11,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 11,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 12,
+      "metric": "awareness",
+      "value": 100
+    },
+    {
+      "day": 12,
+      "metric": "interest",
+      "value": 1
+    },
+    {
+      "day": 12,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 12,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 12,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 13,
+      "metric": "awareness",
+      "value": 110
+    },
+    {
+      "day": 13,
+      "metric": "interest",
+      "value": 2
+    },
+    {
+      "day": 13,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 13,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 13,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 14,
+      "metric": "awareness",
+      "value": 111
+    },
+    {
+      "day": 14,
+      "metric": "interest",
+      "value": 4
+    },
+    {
+      "day": 14,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 14,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 14,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 15,
+      "metric": "awareness",
+      "value": 119
+    },
+    {
+      "day": 15,
+      "metric": "interest",
+      "value": 5
+    },
+    {
+      "day": 15,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 15,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 15,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 16,
+      "metric": "awareness",
+      "value": 124
+    },
+    {
+      "day": 16,
+      "metric": "interest",
+      "value": 5
+    },
+    {
+      "day": 16,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 16,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 16,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 17,
+      "metric": "awareness",
+      "value": 133
+    },
+    {
+      "day": 17,
+      "metric": "interest",
+      "value": 6
+    },
+    {
+      "day": 17,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 17,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 17,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 18,
+      "metric": "awareness",
+      "value": 141
+    },
+    {
+      "day": 18,
+      "metric": "interest",
+      "value": 6
+    },
+    {
+      "day": 18,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 18,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 18,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 19,
+      "metric": "awareness",
+      "value": 148
+    },
+    {
+      "day": 19,
+      "metric": "interest",
+      "value": 8
+    },
+    {
+      "day": 19,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 19,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 19,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 20,
+      "metric": "awareness",
+      "value": 154
+    },
+    {
+      "day": 20,
+      "metric": "interest",
+      "value": 7
+    },
+    {
+      "day": 20,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 20,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 20,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 21,
+      "metric": "awareness",
+      "value": 164
+    },
+    {
+      "day": 21,
+      "metric": "interest",
+      "value": 7
+    },
+    {
+      "day": 21,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 21,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 21,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 22,
+      "metric": "awareness",
+      "value": 169
+    },
+    {
+      "day": 22,
+      "metric": "interest",
+      "value": 8
+    },
+    {
+      "day": 22,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 22,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 22,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 23,
+      "metric": "awareness",
+      "value": 181
+    },
+    {
+      "day": 23,
+      "metric": "interest",
+      "value": 10
+    },
+    {
+      "day": 23,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 23,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 23,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 24,
+      "metric": "awareness",
+      "value": 191
+    },
+    {
+      "day": 24,
+      "metric": "interest",
+      "value": 11
+    },
+    {
+      "day": 24,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 24,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 24,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 25,
+      "metric": "awareness",
+      "value": 200
+    },
+    {
+      "day": 25,
+      "metric": "interest",
+      "value": 11
+    },
+    {
+      "day": 25,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 25,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 25,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 26,
+      "metric": "awareness",
+      "value": 207
+    },
+    {
+      "day": 26,
+      "metric": "interest",
+      "value": 11
+    },
+    {
+      "day": 26,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 26,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 26,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 27,
+      "metric": "awareness",
+      "value": 202
+    },
+    {
+      "day": 27,
+      "metric": "interest",
+      "value": 12
+    },
+    {
+      "day": 27,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 27,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 27,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 28,
+      "metric": "awareness",
+      "value": 208
+    },
+    {
+      "day": 28,
+      "metric": "interest",
+      "value": 13
+    },
+    {
+      "day": 28,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 28,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 28,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 29,
+      "metric": "awareness",
+      "value": 215
+    },
+    {
+      "day": 29,
+      "metric": "interest",
+      "value": 15
+    },
+    {
+      "day": 29,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 29,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 29,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 30,
+      "metric": "awareness",
+      "value": 215
+    },
+    {
+      "day": 30,
+      "metric": "interest",
+      "value": 16
+    },
+    {
+      "day": 30,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 30,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 30,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 31,
+      "metric": "awareness",
+      "value": 219
+    },
+    {
+      "day": 31,
+      "metric": "interest",
+      "value": 16
+    },
+    {
+      "day": 31,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 31,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 31,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 32,
+      "metric": "awareness",
+      "value": 226
+    },
+    {
+      "day": 32,
+      "metric": "interest",
+      "value": 17
+    },
+    {
+      "day": 32,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 32,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 32,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 33,
+      "metric": "awareness",
+      "value": 238
+    },
+    {
+      "day": 33,
+      "metric": "interest",
+      "value": 19
+    },
+    {
+      "day": 33,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 33,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 33,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 34,
+      "metric": "awareness",
+      "value": 239
+    },
+    {
+      "day": 34,
+      "metric": "interest",
+      "value": 19
+    },
+    {
+      "day": 34,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 34,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 34,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 35,
+      "metric": "awareness",
+      "value": 240
+    },
+    {
+      "day": 35,
+      "metric": "interest",
+      "value": 20
+    },
+    {
+      "day": 35,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 35,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 35,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 36,
+      "metric": "awareness",
+      "value": 241
+    },
+    {
+      "day": 36,
+      "metric": "interest",
+      "value": 21
+    },
+    {
+      "day": 36,
+      "metric": "knowledge",
+      "value": 0
+    },
+    {
+      "day": 36,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 36,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 37,
+      "metric": "awareness",
+      "value": 240
+    },
+    {
+      "day": 37,
+      "metric": "interest",
+      "value": 21
+    },
+    {
+      "day": 37,
+      "metric": "knowledge",
+      "value": 1
+    },
+    {
+      "day": 37,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 37,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 38,
+      "metric": "awareness",
+      "value": 241
+    },
+    {
+      "day": 38,
+      "metric": "interest",
+      "value": 22
+    },
+    {
+      "day": 38,
+      "metric": "knowledge",
+      "value": 1
+    },
+    {
+      "day": 38,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 38,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 39,
+      "metric": "awareness",
+      "value": 241
+    },
+    {
+      "day": 39,
+      "metric": "interest",
+      "value": 23
+    },
+    {
+      "day": 39,
+      "metric": "knowledge",
+      "value": 1
+    },
+    {
+      "day": 39,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 39,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 40,
+      "metric": "awareness",
+      "value": 244
+    },
+    {
+      "day": 40,
+      "metric": "interest",
+      "value": 23
+    },
+    {
+      "day": 40,
+      "metric": "knowledge",
+      "value": 1
+    },
+    {
+      "day": 40,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 40,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 41,
+      "metric": "awareness",
+      "value": 249
+    },
+    {
+      "day": 41,
+      "metric": "interest",
+      "value": 24
+    },
+    {
+      "day": 41,
+      "metric": "knowledge",
+      "value": 3
+    },
+    {
+      "day": 41,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 41,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 42,
+      "metric": "awareness",
+      "value": 251
+    },
+    {
+      "day": 42,
+      "metric": "interest",
+      "value": 24
+    },
+    {
+      "day": 42,
+      "metric": "knowledge",
+      "value": 3
+    },
+    {
+      "day": 42,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 42,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 43,
+      "metric": "awareness",
+      "value": 250
+    },
+    {
+      "day": 43,
+      "metric": "interest",
+      "value": 24
+    },
+    {
+      "day": 43,
+      "metric": "knowledge",
+      "value": 4
+    },
+    {
+      "day": 43,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 43,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 44,
+      "metric": "awareness",
+      "value": 252
+    },
+    {
+      "day": 44,
+      "metric": "interest",
+      "value": 24
+    },
+    {
+      "day": 44,
+      "metric": "knowledge",
+      "value": 4
+    },
+    {
+      "day": 44,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 44,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 45,
+      "metric": "awareness",
+      "value": 251
+    },
+    {
+      "day": 45,
+      "metric": "interest",
+      "value": 25
+    },
+    {
+      "day": 45,
+      "metric": "knowledge",
+      "value": 4
+    },
+    {
+      "day": 45,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 45,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 46,
+      "metric": "awareness",
+      "value": 259
+    },
+    {
+      "day": 46,
+      "metric": "interest",
+      "value": 26
+    },
+    {
+      "day": 46,
+      "metric": "knowledge",
+      "value": 4
+    },
+    {
+      "day": 46,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 46,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 47,
+      "metric": "awareness",
+      "value": 265
+    },
+    {
+      "day": 47,
+      "metric": "interest",
+      "value": 25
+    },
+    {
+      "day": 47,
+      "metric": "knowledge",
+      "value": 4
+    },
+    {
+      "day": 47,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 47,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 48,
+      "metric": "awareness",
+      "value": 267
+    },
+    {
+      "day": 48,
+      "metric": "interest",
+      "value": 25
+    },
+    {
+      "day": 48,
+      "metric": "knowledge",
+      "value": 5
+    },
+    {
+      "day": 48,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 48,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 49,
+      "metric": "awareness",
+      "value": 267
+    },
+    {
+      "day": 49,
+      "metric": "interest",
+      "value": 27
+    },
+    {
+      "day": 49,
+      "metric": "knowledge",
+      "value": 5
+    },
+    {
+      "day": 49,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 49,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 50,
+      "metric": "awareness",
+      "value": 265
+    },
+    {
+      "day": 50,
+      "metric": "interest",
+      "value": 27
+    },
+    {
+      "day": 50,
+      "metric": "knowledge",
+      "value": 6
+    },
+    {
+      "day": 50,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 50,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 51,
+      "metric": "awareness",
+      "value": 270
+    },
+    {
+      "day": 51,
+      "metric": "interest",
+      "value": 27
+    },
+    {
+      "day": 51,
+      "metric": "knowledge",
+      "value": 6
+    },
+    {
+      "day": 51,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 51,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 52,
+      "metric": "awareness",
+      "value": 275
+    },
+    {
+      "day": 52,
+      "metric": "interest",
+      "value": 28
+    },
+    {
+      "day": 52,
+      "metric": "knowledge",
+      "value": 6
+    },
+    {
+      "day": 52,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 52,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 53,
+      "metric": "awareness",
+      "value": 274
+    },
+    {
+      "day": 53,
+      "metric": "interest",
+      "value": 31
+    },
+    {
+      "day": 53,
+      "metric": "knowledge",
+      "value": 6
+    },
+    {
+      "day": 53,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 53,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 54,
+      "metric": "awareness",
+      "value": 276
+    },
+    {
+      "day": 54,
+      "metric": "interest",
+      "value": 34
+    },
+    {
+      "day": 54,
+      "metric": "knowledge",
+      "value": 9
+    },
+    {
+      "day": 54,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 54,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 55,
+      "metric": "awareness",
+      "value": 281
+    },
+    {
+      "day": 55,
+      "metric": "interest",
+      "value": 33
+    },
+    {
+      "day": 55,
+      "metric": "knowledge",
+      "value": 9
+    },
+    {
+      "day": 55,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 55,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 56,
+      "metric": "awareness",
+      "value": 279
+    },
+    {
+      "day": 56,
+      "metric": "interest",
+      "value": 33
+    },
+    {
+      "day": 56,
+      "metric": "knowledge",
+      "value": 9
+    },
+    {
+      "day": 56,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 56,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 57,
+      "metric": "awareness",
+      "value": 281
+    },
+    {
+      "day": 57,
+      "metric": "interest",
+      "value": 34
+    },
+    {
+      "day": 57,
+      "metric": "knowledge",
+      "value": 8
+    },
+    {
+      "day": 57,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 57,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 58,
+      "metric": "awareness",
+      "value": 282
+    },
+    {
+      "day": 58,
+      "metric": "interest",
+      "value": 37
+    },
+    {
+      "day": 58,
+      "metric": "knowledge",
+      "value": 8
+    },
+    {
+      "day": 58,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 58,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 59,
+      "metric": "awareness",
+      "value": 293
+    },
+    {
+      "day": 59,
+      "metric": "interest",
+      "value": 40
+    },
+    {
+      "day": 59,
+      "metric": "knowledge",
+      "value": 8
+    },
+    {
+      "day": 59,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 59,
+      "metric": "intent",
+      "value": 0
+    },
+    {
+      "day": 60,
+      "metric": "awareness",
+      "value": 292
+    },
+    {
+      "day": 60,
+      "metric": "interest",
+      "value": 40
+    },
+    {
+      "day": 60,
+      "metric": "knowledge",
+      "value": 8
+    },
+    {
+      "day": 60,
+      "metric": "liking",
+      "value": 0
+    },
+    {
+      "day": 60,
+      "metric": "intent",
+      "value": 0
+    }
+  ],
+  "summary": {
+    "awareness": {
+      "start": 0,
+      "end": 292,
+      "delta": 292
+    },
+    "interest": {
+      "start": 0,
+      "end": 40,
+      "delta": 40
+    },
+    "knowledge": {
+      "start": 0,
+      "end": 8,
+      "delta": 8
+    },
+    "liking": {
+      "start": 0,
+      "end": 0,
+      "delta": 0
+    },
+    "intent": {
+      "start": 0,
+      "end": 0,
+      "delta": 0
+    }
+  },
+  "model_data": "    Day  awareness  interest  knowledge  liking  intent\n0     0          0         0          0       0       0\n1     1          7         0          0       0       0\n2     2         15         0          0       0       0\n3     3         27         0          0       0       0\n4     4         33         0          0       0       0\n..  ...        ...       ...        ...     ...     ...\n56   56        279        33          9       0       0\n57   57        281        34          8       0       0\n58   58        282        37          8       0       0\n59   59        293        40          8       0       0\n60   60        292        40          8       0       0\n\n[61 rows x 6 columns]"
+}

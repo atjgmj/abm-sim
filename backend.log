@@ -1,0 +1,6 @@
+INFO:     Started server process [23471]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+Could not import SolaraViz. If you need it, install with 'pip install --pre mesa[viz]'
+INFO:     127.0.0.1:63113 - "GET / HTTP/1.1" 200 OK
