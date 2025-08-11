@@ -1,6 +1,252 @@
-INFO:     Started server process [23471]
+INFO:     Started server process [31372]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 Could not import SolaraViz. If you need it, install with 'pip install --pre mesa[viz]'
-INFO:     127.0.0.1:63113 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52772 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52840 - "POST /api/scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52843 - "POST /api/network/preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52844 - "POST /api/network/preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52848 - "POST /api/scenario HTTP/1.1" 200 OK
+Created run 65b12845-0a74-4346-9603-7c2e88b1a5c1, starting background task
+Background task added for run 65b12845-0a74-4346-9603-7c2e88b1a5c1
+INFO:     127.0.0.1:52851 - "POST /api/run HTTP/1.1" 200 OK
+Starting simulation 65b12845-0a74-4346-9603-7c2e88b1a5c1
+Generating network: ws, n=10000
+Network generated with 10000 nodes
+Running repetition 1/10
+Creating model with seed 42
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:52854 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52858 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:52861 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52864 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:52867 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52870 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:52873 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:52876 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52879 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:52882 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52885 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 1 completed
+Running repetition 2/10
+Creating model with seed 43
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:52888 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52892 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:52895 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:52901 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52904 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:52907 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52910 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:52913 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:52916 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52919 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 2 completed
+Running repetition 3/10
+Creating model with seed 44
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:52922 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:52928 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52931 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:52934 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:52940 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52943 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:52946 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52949 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:52953 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52956 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 3 completed
+Running repetition 4/10
+Creating model with seed 45
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:52959 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52963 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:52966 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52969 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:52972 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52975 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:52978 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:52982 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52985 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:52988 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52991 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 4 completed
+Running repetition 5/10
+Creating model with seed 46
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:52994 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52997 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53000 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53003 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53006 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53009 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53012 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53015 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53018 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53021 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53024 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 5 completed
+Running repetition 6/10
+Creating model with seed 47
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:53029 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53033 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53036 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53039 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53042 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53045 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53049 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53052 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53055 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53058 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53061 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 6 completed
+Running repetition 7/10
+Creating model with seed 48
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:53064 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53067 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53070 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53073 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53076 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53079 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53082 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53085 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53088 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53091 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53094 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 7 completed
+Running repetition 8/10
+Creating model with seed 49
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:53097 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53100 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53103 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53106 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53109 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53112 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53115 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53118 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53124 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53127 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 8 completed
+Running repetition 9/10
+Creating model with seed 50
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:53130 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53133 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53136 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53140 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53143 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53146 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53149 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53152 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53155 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53158 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53161 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 9 completed
+Running repetition 10/10
+Creating model with seed 51
+Model created, running simulation...
+Starting simulation with 10000 agents for 60 steps
+Simulation step 0/60
+INFO:     127.0.0.1:53164 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53167 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 10/70
+INFO:     127.0.0.1:53170 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53173 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 20/80
+INFO:     127.0.0.1:53176 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 30/90
+INFO:     127.0.0.1:53179 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53182 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 40/100
+INFO:     127.0.0.1:53185 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53188 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation step 50/110
+INFO:     127.0.0.1:53191 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53194 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+Simulation completed, collecting data...
+Repetition 10 completed
+Simulation 65b12845-0a74-4346-9603-7c2e88b1a5c1 completed successfully
+INFO:     127.0.0.1:53197 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53200 - "GET /api/run/65b12845-0a74-4346-9603-7c2e88b1a5c1/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53209 - "POST /api/network/preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53211 - "POST /api/network/preview HTTP/1.1" 200 OK
