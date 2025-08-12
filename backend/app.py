@@ -14,6 +14,12 @@ from .schemas import (
     RunStatusResponse, ResultsResponse, NetworkPreviewResponse,
     RunStatus, NetworkConfig
 )
+from .external.social_media import (
+    ParameterCalibrator, ExternalDataRequest, CalibratedParametersResponse
+)
+from .ml.optimizer import (
+    ParameterOptimizer, OptimizationTarget, OptimizationRequest, OptimizationResponse
+)
 from .model.network import generate_network, network_to_preview
 from .model.abm import CommunicationModel
 from .store.db import SimulationStore
@@ -230,6 +236,9 @@ async def run_simulation(run_id: str, scenario: ScenarioRequest) -> None:
                 network=network,
                 media_mix=scenario.media_mix,
                 wom_config=scenario.wom,
+                personality_config=scenario.personality,
+                demographic_config=scenario.demographics,
+                influencer_config=scenario.influencers,
                 steps=scenario.steps,
                 seed=rep_seed
             )
@@ -276,6 +285,182 @@ def aggregate_repetitions(results_list) -> Dict[str, Any]:
     # For now, just return the first repetition's results
     # In a full implementation, you'd average across repetitions
     return results_list[0]
+
+
+@app.post("/api/calibrate", response_model=CalibratedParametersResponse)
+async def calibrate_parameters(request: ExternalDataRequest):
+    """Calibrate ABM parameters using external social media data."""
+    try:
+        calibrator = ParameterCalibrator()
+        
+        calibrated_params = await calibrator.calibrate_from_campaign_data(
+            request.campaign_keywords,
+            request.baseline_scenario
+        )
+        
+        # Calculate confidence score based on data availability
+        confidence_score = 0.75  # Mock confidence for synthetic data
+        
+        calibration_notes = [
+            "Parameters calibrated using social media engagement data",
+            "Media mix adjusted based on platform performance",
+            "Demographics calibrated from audience insights",
+            "Personality traits derived from engagement patterns"
+        ]
+        
+        if not request.api_keys:
+            calibration_notes.append("Using synthetic data - provide API keys for real data")
+            confidence_score = 0.5
+        
+        return CalibratedParametersResponse(
+            original_params=request.baseline_scenario,
+            calibrated_params=calibrated_params,
+            data_sources=["twitter", "instagram", "tiktok"],
+            confidence_score=confidence_score,
+            calibration_notes=calibration_notes
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Calibration failed: {str(e)}")
+
+
+@app.get("/api/trending")
+async def get_trending_topics(limit: int = 10):
+    """Get current trending topics for campaign keyword suggestions."""
+    try:
+        from .external.social_media import SocialMediaAnalyzer
+        
+        async with SocialMediaAnalyzer() as analyzer:
+            trends = await analyzer.get_trending_topics(limit)
+        
+        return {
+            "trends": [
+                {
+                    "keyword": trend.keyword,
+                    "volume": trend.volume,
+                    "sentiment": trend.sentiment,
+                    "growth_rate": trend.growth_rate
+                }
+                for trend in trends
+            ]
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch trends: {str(e)}")
+
+
+@app.post("/api/optimize")
+async def optimize_parameters(request: dict):
+    """Optimize ABM parameters using machine learning."""
+    try:
+        # Parse request
+        base_scenario = ScenarioRequest(**request['base_scenario'])
+        
+        # Create optimization targets
+        targets = []
+        for target_data in request.get('optimization_targets', []):
+            targets.append(OptimizationTarget(
+                kpi=KPICategory(target_data['kpi']),
+                target_value=target_data['target_value'],
+                weight=target_data.get('weight', 1.0),
+                target_type=target_data.get('target_type', 'maximize')
+            ))
+        
+        if not targets:
+            # Default targets
+            targets = [
+                OptimizationTarget(kpi=KPICategory.AWARENESS, target_value=5000, weight=0.6),
+                OptimizationTarget(kpi=KPICategory.INTENT, target_value=1000, weight=0.4)
+            ]
+        
+        # Initialize optimizer
+        optimizer = ParameterOptimizer(store)
+        
+        # Run optimization
+        result = await asyncio.get_event_loop().run_in_executor(
+            executor,
+            lambda: optimizer.optimize_parameters_ml(
+                base_scenario,
+                targets,
+                request.get('n_trials', 30)
+            )
+        )
+        
+        # Create optimized scenario
+        optimized_scenario = base_scenario.copy(deep=True)
+        
+        # Apply optimized parameters
+        if 'sns_share' in result.best_params:
+            optimized_scenario.media_mix.sns.share = result.best_params['sns_share']
+            optimized_scenario.media_mix.sns.alpha = result.best_params['sns_alpha']
+            optimized_scenario.media_mix.video.share = result.best_params['video_share']
+            optimized_scenario.media_mix.video.alpha = result.best_params['video_alpha']
+            optimized_scenario.media_mix.search.share = result.best_params['search_share']
+            optimized_scenario.media_mix.search.alpha = result.best_params['search_alpha']
+            
+            optimized_scenario.wom.p_generate = result.best_params['wom_p_generate']
+            optimized_scenario.wom.decay = result.best_params['wom_decay']
+            
+            if 'personality_openness' in result.best_params:
+                optimized_scenario.personality.openness = result.best_params['personality_openness']
+                optimized_scenario.personality.social_influence = result.best_params['personality_social_influence']
+                optimized_scenario.personality.media_affinity = result.best_params['personality_media_affinity']
+                optimized_scenario.personality.risk_tolerance = result.best_params['personality_risk_tolerance']
+            
+            if 'influencers_enabled' in result.best_params:
+                optimized_scenario.influencers.enable_influencers = result.best_params['influencers_enabled']
+                optimized_scenario.influencers.influencer_ratio = result.best_params['influencers_ratio']
+                optimized_scenario.influencers.influence_multiplier = result.best_params['influencers_multiplier']
+        
+        # Generate recommendations
+        recommendations = []
+        if result.improvement > 10:
+            recommendations.append(f"Significant improvement expected: {result.improvement:.1f}%")
+        elif result.improvement > 0:
+            recommendations.append(f"Moderate improvement expected: {result.improvement:.1f}%")
+        else:
+            recommendations.append("Current parameters appear near-optimal")
+        
+        if result.confidence > 0.7:
+            recommendations.append("High confidence in optimization results")
+        elif result.confidence > 0.4:
+            recommendations.append("Moderate confidence - recommend validation")
+        else:
+            recommendations.append("Low confidence - collect more training data")
+        
+        return {
+            "optimization_result": {
+                "best_params": result.best_params,
+                "best_score": result.best_score,
+                "improvement": result.improvement,
+                "confidence": result.confidence,
+                "method_used": result.method_used,
+                "training_samples": result.training_samples
+            },
+            "optimized_scenario": optimized_scenario.model_dump(),
+            "recommendations": recommendations
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Optimization failed: {str(e)}")
+
+
+@app.get("/api/training-data-status")
+async def get_training_data_status():
+    """Get status of available training data for ML optimization."""
+    try:
+        optimizer = ParameterOptimizer(store)
+        simulations = store.get_all_simulations()
+        
+        return {
+            "total_simulations": len(simulations),
+            "suitable_for_training": len(simulations) >= 10,
+            "recommended_minimum": 20,
+            "data_quality": "Good" if len(simulations) >= 20 else "Limited" if len(simulations) >= 10 else "Insufficient"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get training data status: {str(e)}")
 
 
 if __name__ == "__main__":

@@ -43,9 +43,39 @@ export interface MediaMix {
   search: MediaChannel;
 }
 
+export enum PersonalityType {
+  INNOVATOR = "innovator",
+  EARLY_ADOPTER = "early_adopter", 
+  EARLY_MAJORITY = "early_majority",
+  LATE_MAJORITY = "late_majority",
+  LAGGARD = "laggard"
+}
+
+export interface PersonalityConfig {
+  openness: number;
+  social_influence: number;
+  media_affinity: number;
+  risk_tolerance: number;
+}
+
+export interface DemographicConfig {
+  age_group: number;
+  income_level: number;
+  urban_rural: number;
+  education_level: number;
+}
+
+export interface InfluencerConfig {
+  enable_influencers: boolean;
+  influencer_ratio: number;
+  influence_multiplier: number;
+}
+
 export interface WordOfMouthConfig {
   p_generate: number;
   decay: number;
+  personality_weight: number;
+  demographic_weight: number;
 }
 
 export interface NetworkConfig {
@@ -61,6 +91,9 @@ export interface ScenarioRequest {
   media_mix: MediaMix;
   wom: WordOfMouthConfig;
   network: NetworkConfig;
+  personality: PersonalityConfig;
+  demographics: DemographicConfig;
+  influencers: InfluencerConfig;
   steps: number;
   reps: number;
   seed: number;

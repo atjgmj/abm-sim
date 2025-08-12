@@ -190,3 +190,47 @@ class SimulationStore:
         pivot_df.to_csv(csv_path)
         
         return csv_path
+    
+    def get_all_simulations(self) -> List[Dict[str, Any]]:
+        """Get all completed simulations with their scenarios and results."""
+        simulations = []
+        
+        with sqlite3.connect(self.db_path) as conn:
+            # Get all completed runs
+            cursor = conn.execute("""
+                SELECT r.id, r.scenario_id, r.status, r.progress, r.message, r.started_at,
+                       s.config as scenario_config, r.results_path
+                FROM runs r
+                JOIN scenarios s ON r.scenario_id = s.id
+                WHERE r.status = 'done' AND r.results_path IS NOT NULL
+                ORDER BY r.completed_at DESC
+            """)
+            runs = cursor.fetchall()
+            
+            for run in runs:
+                run_id, scenario_id, status, progress, message, created_at, scenario_config, results_path = run
+                
+                try:
+                    # Parse scenario
+                    scenario_data = json.loads(scenario_config)
+                    
+                    # Load results if available
+                    results_data = None
+                    if results_path and Path(results_path).exists():
+                        with open(results_path, 'r') as f:
+                            results_data = json.load(f)
+                    
+                    if results_data:  # Only include runs with results
+                        simulations.append({
+                            'id': run_id,
+                            'scenario_id': scenario_id,
+                            'scenario': scenario_data,
+                            'results': results_data,
+                            'created_at': created_at
+                        })
+                
+                except (json.JSONDecodeError, FileNotFoundError) as e:
+                    print(f"Error loading simulation data for run {run_id}: {e}")
+                    continue
+        
+        return simulations

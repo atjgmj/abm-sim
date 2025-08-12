@@ -3,16 +3,22 @@ import { ScenarioForm } from './components/ScenarioForm';
 import { NetworkPreview } from './components/NetworkPreview';
 import { RunPanel } from './components/RunPanel';
 import { Dashboard } from './components/Dashboard';
+import { ParameterCalibration } from './components/ParameterCalibration';
 import { ScenarioRequest, RunResponse, ResultsResponse } from './types';
 
 function App() {
   const [currentScenario, setCurrentScenario] = useState<ScenarioRequest | null>(null);
   const [currentRun, setCurrentRun] = useState<RunResponse | null>(null);
   const [results, setResults] = useState<ResultsResponse | null>(null);
-  const [activeTab, setActiveTab] = useState<'scenario' | 'network' | 'run' | 'results'>('scenario');
+  const [activeTab, setActiveTab] = useState<'scenario' | 'calibrate' | 'network' | 'run' | 'results'>('scenario');
 
   const handleScenarioCreated = (scenario: ScenarioRequest) => {
     setCurrentScenario(scenario);
+    setActiveTab('calibrate');
+  };
+
+  const handleCalibratedScenario = (calibrated: ScenarioRequest) => {
+    setCurrentScenario(calibrated);
     setActiveTab('network');
   };
 
@@ -43,6 +49,7 @@ function App() {
         <nav className="flex space-x-8 mb-8">
           {[
             { id: 'scenario', label: 'Scenario Setup', enabled: true },
+            { id: 'calibrate', label: 'Smart Calibration', enabled: !!currentScenario },
             { id: 'network', label: 'Network Preview', enabled: !!currentScenario },
             { id: 'run', label: 'Simulation Run', enabled: !!currentScenario },
             { id: 'results', label: 'Results', enabled: !!results },
@@ -69,6 +76,15 @@ function App() {
           {activeTab === 'scenario' && (
             <div className="p-6">
               <ScenarioForm onScenarioCreated={handleScenarioCreated} />
+            </div>
+          )}
+
+          {activeTab === 'calibrate' && currentScenario && (
+            <div className="p-6">
+              <ParameterCalibration 
+                scenario={currentScenario}
+                onCalibratedScenario={handleCalibratedScenario}
+              />
             </div>
           )}
 
