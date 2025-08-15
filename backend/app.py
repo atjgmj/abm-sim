@@ -12,11 +12,13 @@ from fastapi.responses import FileResponse
 from .schemas import (
     ScenarioRequest, ScenarioResponse, RunRequest, RunResponse,
     RunStatusResponse, ResultsResponse, NetworkPreviewResponse,
-    RunStatus, NetworkConfig
+    RunStatus, NetworkConfig, KPICategory
 )
 from .external.social_media import (
     ParameterCalibrator, ExternalDataRequest, CalibratedParametersResponse
 )
+from .external.competitor_analysis import CompetitorAnalyzer, IndustryType
+from .external.roi_optimizer import ROIOptimizer
 from .ml.optimizer import (
     ParameterOptimizer, OptimizationTarget, OptimizationRequest, OptimizationResponse
 )
@@ -353,8 +355,36 @@ async def get_trending_topics(limit: int = 10):
 async def optimize_parameters(request: dict):
     """Optimize ABM parameters using machine learning."""
     try:
-        # Parse request
-        base_scenario = ScenarioRequest(**request['base_scenario'])
+        # Parse request - fix data types to match schema expectations
+        scenario_data = request['base_scenario']
+        
+        # Fix network type mapping
+        if 'network' in scenario_data and 'type' in scenario_data['network']:
+            network_type = scenario_data['network']['type']
+            type_mapping = {
+                'erdos_renyi': 'er',
+                'watts_strogatz': 'ws', 
+                'barabasi_albert': 'ba',
+                'er': 'er',
+                'ws': 'ws',
+                'ba': 'ba'
+            }
+            scenario_data['network']['type'] = type_mapping.get(network_type, 'ws')
+        
+        # Fix demographics - ensure integers
+        if 'demographics' in scenario_data:
+            demo = scenario_data['demographics']
+            if 'age_group' in demo:
+                demo['age_group'] = int(round(demo['age_group'])) if isinstance(demo['age_group'], (int, float)) else 3
+                demo['age_group'] = max(1, min(5, demo['age_group']))
+            if 'income_level' in demo:
+                demo['income_level'] = int(round(demo['income_level'])) if isinstance(demo['income_level'], (int, float)) else 3
+                demo['income_level'] = max(1, min(5, demo['income_level']))
+            if 'education_level' in demo:
+                demo['education_level'] = int(round(demo['education_level'])) if isinstance(demo['education_level'], (int, float)) else 3
+                demo['education_level'] = max(1, min(5, demo['education_level']))
+        
+        base_scenario = ScenarioRequest(**scenario_data)
         
         # Create optimization targets
         targets = []
@@ -387,7 +417,7 @@ async def optimize_parameters(request: dict):
         )
         
         # Create optimized scenario
-        optimized_scenario = base_scenario.copy(deep=True)
+        optimized_scenario = base_scenario.model_copy(deep=True)
         
         # Apply optimized parameters
         if 'sns_share' in result.best_params:
@@ -442,6 +472,8 @@ async def optimize_parameters(request: dict):
         }
         
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Optimization failed: {str(e)}")
 
 
@@ -461,6 +493,197 @@ async def get_training_data_status():
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get training data status: {str(e)}")
+
+
+@app.post("/api/generate-training-data")
+async def generate_training_data(request: dict, background_tasks: BackgroundTasks):
+    """Generate training data by running multiple simulation variants."""
+    try:
+        base_scenario = ScenarioRequest(**request.get('base_scenario', {}))
+        num_variants = request.get('num_variants', 15)
+        
+        # Generate parameter variants
+        variants = []
+        import random
+        random.seed(42)
+        
+        for i in range(num_variants):
+            variant = base_scenario.model_copy(deep=True)
+            
+            # Vary media mix
+            sns_share = random.uniform(0.2, 0.6)
+            video_share = random.uniform(0.2, 0.5)
+            search_share = random.uniform(0.1, 0.4)
+            
+            # Normalize shares
+            total = sns_share + video_share + search_share
+            variant.media_mix.sns.share = sns_share / total
+            variant.media_mix.video.share = video_share / total
+            variant.media_mix.search.share = search_share / total
+            
+            # Vary alphas
+            variant.media_mix.sns.alpha = random.uniform(0.02, 0.08)
+            variant.media_mix.video.alpha = random.uniform(0.01, 0.05)
+            variant.media_mix.search.alpha = random.uniform(0.005, 0.03)
+            
+            # Vary WoM parameters
+            variant.wom.p_generate = random.uniform(0.05, 0.15)
+            variant.wom.decay = random.uniform(0.8, 0.95)
+            variant.wom.personality_weight = random.uniform(0.2, 0.5)
+            variant.wom.demographic_weight = random.uniform(0.1, 0.4)
+            
+            # Vary personality
+            variant.personality.openness = random.uniform(0.3, 0.7)
+            variant.personality.social_influence = random.uniform(0.3, 0.7)
+            variant.personality.media_affinity = random.uniform(0.3, 0.7)
+            variant.personality.risk_tolerance = random.uniform(0.3, 0.7)
+            
+            # Vary influencers
+            variant.influencers.enable_influencers = random.choice([True, False])
+            variant.influencers.influencer_ratio = random.uniform(0.01, 0.04)
+            variant.influencers.influence_multiplier = random.uniform(2.0, 4.0)
+            
+            # Vary network size
+            variant.network.n = random.choice([5000, 8000, 10000, 12000])
+            variant.network.k = random.choice([4, 6, 8, 10])
+            
+            # Set unique name
+            variant.name = f"Training_Variant_{i+1}"
+            variant.seed = 42 + i
+            
+            variants.append(variant)
+        
+        # Save scenarios and queue runs
+        variant_runs = []
+        for variant in variants:
+            scenario_id = store.save_scenario(variant)
+            run_id = store.create_run(scenario_id)
+            
+            # Start background simulation
+            background_tasks.add_task(run_simulation, run_id, variant)
+            variant_runs.append({"scenario_id": scenario_id, "run_id": run_id})
+        
+        return {
+            "message": f"Started {num_variants} training simulations",
+            "variants": variant_runs,
+            "estimated_completion": f"{num_variants * 2} minutes"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate training data: {str(e)}")
+
+
+@app.post("/api/competitor-analysis")
+async def analyze_competitors(request: dict):
+    """競合分析を実行"""
+    try:
+        industry = request.get('industry', 'technology')
+        keywords = request.get('keywords', [])
+        
+        analyzer = CompetitorAnalyzer()
+        analysis = await analyzer.analyze_competitors(
+            IndustryType(industry), 
+            keywords
+        )
+        
+        return {
+            "analysis": {
+                "target_company": analysis.target_company,
+                "industry": analysis.industry.value,
+                "market_position": analysis.market_position,
+                "competitors": [
+                    {
+                        "company": comp.company,
+                        "awareness_rate": comp.awareness_rate,
+                        "market_share": comp.market_share,
+                        "social_engagement": comp.social_engagement,
+                        "media_spend": comp.media_spend,
+                        "conversion_rate": comp.conversion_rate
+                    }
+                    for comp in analysis.competitors
+                ],
+                "strengths": analysis.strengths,
+                "opportunities": analysis.opportunities,
+                "threats": analysis.threats,
+                "recommended_strategies": analysis.recommended_strategies
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Competitor analysis failed: {str(e)}")
+
+
+@app.get("/api/industry-insights/{industry}")
+async def get_industry_insights(industry: str):
+    """業界インサイトを取得"""
+    try:
+        analyzer = CompetitorAnalyzer()
+        insights = await analyzer.get_industry_insights(IndustryType(industry))
+        return insights
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get industry insights: {str(e)}")
+
+
+@app.post("/api/roi-prediction")
+async def predict_roi(request: dict):
+    """ROI予測と予算最適化"""
+    try:
+        media_mix = request.get('media_mix', {})
+        total_budget = request.get('total_budget', 100000)
+        historical_performance = request.get('historical_performance')
+        
+        optimizer = ROIOptimizer()
+        prediction = await optimizer.predict_roi(
+            media_mix, 
+            total_budget, 
+            historical_performance
+        )
+        
+        return {
+            "roi_prediction": {
+                "scenario_name": prediction.scenario_name,
+                "total_budget": prediction.total_budget,
+                "predicted_revenue": prediction.predicted_revenue,
+                "predicted_roi": prediction.predicted_roi,
+                "confidence_interval": prediction.confidence_interval,
+                "channel_breakdown": [
+                    {
+                        "channel": alloc.channel,
+                        "current_budget": alloc.current_budget,
+                        "optimal_budget": alloc.optimal_budget,
+                        "expected_roi": alloc.expected_roi,
+                        "confidence": alloc.confidence
+                    }
+                    for alloc in prediction.channel_breakdown
+                ],
+                "optimization_notes": prediction.optimization_notes
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"ROI prediction failed: {str(e)}")
+
+
+@app.post("/api/ab-test-scenarios")
+async def generate_ab_test_scenarios(request: dict):
+    """A/Bテストシナリオを自動生成"""
+    try:
+        base_scenario = request.get('base_scenario', {})
+        total_budget = request.get('total_budget', 100000)
+        test_variants = request.get('test_variants', 3)
+        
+        optimizer = ROIOptimizer()
+        scenarios = await optimizer.generate_ab_test_scenarios(
+            base_scenario,
+            total_budget,
+            test_variants
+        )
+        
+        return {"test_scenarios": scenarios}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"A/B test scenario generation failed: {str(e)}")
 
 
 if __name__ == "__main__":

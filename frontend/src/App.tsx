@@ -4,13 +4,14 @@ import { NetworkPreview } from './components/NetworkPreview';
 import { RunPanel } from './components/RunPanel';
 import { Dashboard } from './components/Dashboard';
 import { ParameterCalibration } from './components/ParameterCalibration';
+import { ProductOverview } from './components/ProductOverview';
 import { ScenarioRequest, RunResponse, ResultsResponse } from './types';
 
 function App() {
   const [currentScenario, setCurrentScenario] = useState<ScenarioRequest | null>(null);
   const [currentRun, setCurrentRun] = useState<RunResponse | null>(null);
   const [results, setResults] = useState<ResultsResponse | null>(null);
-  const [activeTab, setActiveTab] = useState<'scenario' | 'calibrate' | 'network' | 'run' | 'results'>('scenario');
+  const [activeTab, setActiveTab] = useState<'overview' | 'scenario' | 'calibrate' | 'network' | 'run' | 'results'>('overview');
 
   const handleScenarioCreated = (scenario: ScenarioRequest) => {
     setCurrentScenario(scenario);
@@ -48,6 +49,7 @@ function App() {
         {/* Tab Navigation */}
         <nav className="flex space-x-8 mb-8">
           {[
+            { id: 'overview', label: '製品概要', enabled: true },
             { id: 'scenario', label: 'Scenario Setup', enabled: true },
             { id: 'calibrate', label: 'Smart Calibration', enabled: !!currentScenario },
             { id: 'network', label: 'Network Preview', enabled: !!currentScenario },
@@ -73,6 +75,12 @@ function App() {
 
         {/* Tab Content */}
         <div className="bg-white rounded-lg shadow">
+          {activeTab === 'overview' && (
+            <div className="p-6">
+              <ProductOverview />
+            </div>
+          )}
+
           {activeTab === 'scenario' && (
             <div className="p-6">
               <ScenarioForm onScenarioCreated={handleScenarioCreated} />

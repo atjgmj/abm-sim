@@ -313,7 +313,7 @@ class ParameterOptimizer:
                 scenario_params['media_mix'][channel]['share'] /= total_share
             
             # Create test scenario
-            test_scenario = base_scenario.copy(deep=True)
+            test_scenario = base_scenario.model_copy(deep=True)
             test_scenario.media_mix.sns.share = scenario_params['media_mix']['sns']['share']
             test_scenario.media_mix.sns.alpha = scenario_params['media_mix']['sns']['alpha']
             test_scenario.media_mix.video.share = scenario_params['media_mix']['video']['share']
