@@ -1,0 +1,111 @@
+{
+  "trending_topics": [
+    {
+      "keyword": "AI革命",
+      "volume": 125000,
+      "sentiment": 0.72,
+      "growth_rate": 0.23,
+      "category": "technology",
+      "related_terms": ["機械学習", "ChatGPT", "自動化"]
+    },
+    {
+      "keyword": "サステナブル",
+      "volume": 89000,
+      "sentiment": 0.68,
+      "growth_rate": 0.18,
+      "category": "lifestyle",
+      "related_terms": ["エコ", "SDGs", "環境"]
+    },
+    {
+      "keyword": "リモートワーク",
+      "volume": 67000,
+      "sentiment": 0.54,
+      "growth_rate": 0.12,
+      "category": "business",
+      "related_terms": ["在宅勤務", "デジタル", "ワークライフバランス"]
+    },
+    {
+      "keyword": "メタバース",
+      "volume": 54000,
+      "sentiment": 0.61,
+      "growth_rate": 0.15,
+      "category": "technology",
+      "related_terms": ["VR", "仮想現実", "デジタル空間"]
+    },
+    {
+      "keyword": "健康経営",
+      "volume": 43000,
+      "sentiment": 0.75,
+      "growth_rate": 0.21,
+      "category": "business",
+      "related_terms": ["ウェルビーイング", "働き方改革", "従業員満足度"]
+    },
+    {
+      "keyword": "DX推進",
+      "volume": 38000,
+      "sentiment": 0.66,
+      "growth_rate": 0.19,
+      "category": "business",
+      "related_terms": ["デジタル変革", "業務効率化", "クラウド"]
+    },
+    {
+      "keyword": "インフルエンサー",
+      "volume": 92000,
+      "sentiment": 0.58,
+      "growth_rate": 0.14,
+      "category": "marketing",
+      "related_terms": ["SNS", "ブランディング", "口コミ"]
+    },
+    {
+      "keyword": "Z世代",
+      "volume": 76000,
+      "sentiment": 0.52,
+      "growth_rate": 0.16,
+      "category": "demographics",
+      "related_terms": ["若者", "デジタルネイティブ", "価値観"]
+    },
+    {
+      "keyword": "カーボンニュートラル",
+      "volume": 31000,
+      "sentiment": 0.73,
+      "growth_rate": 0.25,
+      "category": "environment",
+      "related_terms": ["脱炭素", "再生エネルギー", "温室効果ガス"]
+    },
+    {
+      "keyword": "NFT",
+      "volume": 28000,
+      "sentiment": 0.49,
+      "growth_rate": -0.05,
+      "category": "technology",
+      "related_terms": ["ブロックチェーン", "デジタルアート", "暗号資産"]
+    }
+  ],
+  "engagement_patterns": {
+    "peak_hours": [12, 18, 20, 21],
+    "platform_preferences": {
+      "twitter": 0.35,
+      "instagram": 0.28,
+      "tiktok": 0.22,
+      "youtube": 0.15
+    },
+    "content_types": {
+      "video": 0.45,
+      "image": 0.30,
+      "text": 0.25
+    }
+  },
+  "demographic_insights": {
+    "age_groups": {
+      "18-24": {"engagement_rate": 0.78, "share_rate": 0.23},
+      "25-34": {"engagement_rate": 0.65, "share_rate": 0.18},
+      "35-44": {"engagement_rate": 0.52, "share_rate": 0.12},
+      "45-54": {"engagement_rate": 0.41, "share_rate": 0.08},
+      "55+": {"engagement_rate": 0.28, "share_rate": 0.05}
+    },
+    "gender_preferences": {
+      "male": {"technology": 0.72, "business": 0.68, "sports": 0.81},
+      "female": {"lifestyle": 0.76, "health": 0.74, "education": 0.69}
+    }
+  }
+}

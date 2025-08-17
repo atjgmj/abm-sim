@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from scipy.optimize import minimize
 import json
+from demo_data.loader import demo_loader
 
 @dataclass
 class BudgetAllocation:
@@ -36,28 +37,28 @@ class ROIOptimizer:
     """ROI予測と予算最適化エンジン"""
     
     def __init__(self):
-        # チャネル効率性ベースライン（業界平均）
+        # チャネル効率性ベースライン（業界平均）- より現実的な値に調整
         self.channel_baselines = {
             'sns': {
-                'cpm': 8.5,  # Cost per mille
-                'ctr': 0.035,  # Click-through rate
-                'cvr': 0.08,   # Conversion rate
-                'avg_order_value': 120,
-                'saturation_point': 100000  # Budget saturation
+                'cpm': 15.0,  # Cost per mille (increased for realism)
+                'ctr': 0.025,  # Click-through rate (decreased)
+                'cvr': 0.02,   # Conversion rate (more realistic)
+                'avg_order_value': 85,  # Lower average order value
+                'saturation_point': 200000  # Budget saturation
             },
             'video': {
-                'cpm': 12.0,
-                'ctr': 0.045,
-                'cvr': 0.12,
-                'avg_order_value': 150,
-                'saturation_point': 80000
+                'cpm': 20.0,  # Higher cost for video
+                'ctr': 0.035,
+                'cvr': 0.025,  # More realistic conversion rate
+                'avg_order_value': 120,
+                'saturation_point': 150000
             },
             'search': {
-                'cpm': 15.0,
-                'ctr': 0.065,
-                'cvr': 0.18,
-                'avg_order_value': 180,
-                'saturation_point': 60000
+                'cpm': 25.0,  # Higher cost for search ads
+                'ctr': 0.045,  # Realistic CTR for search
+                'cvr': 0.035,  # More realistic conversion rate
+                'avg_order_value': 140,
+                'saturation_point': 180000
             }
         }
     
@@ -65,9 +66,22 @@ class ROIOptimizer:
         self, 
         media_mix: Dict[str, Any], 
         total_budget: float,
-        historical_performance: Optional[List[Dict]] = None
+        historical_performance: Optional[List[Dict]] = None,
+        industry: str = "technology"
     ) -> ROIPrediction:
         """ROIを予測し、予算を最適化"""
+        
+        try:
+            # デモデータから業界ベンチマークを取得
+            roi_data = demo_loader.load_roi_benchmarks(industry)
+            industry_benchmarks = roi_data.get("benchmarks", {})
+            
+            # ベンチマークデータでチャネルベースラインを更新
+            if industry_benchmarks:
+                self._update_channel_baselines_from_demo(industry_benchmarks)
+        except Exception as e:
+            # デモデータ読み込み失敗時はデフォルトを使用
+            pass
         
         # 現在の予算配分
         current_allocation = self._calculate_budget_allocation(media_mix, total_budget)
@@ -78,7 +92,8 @@ class ROIOptimizer:
         # 予算最適化
         optimal_allocation = self._optimize_budget_allocation(
             total_budget, 
-            historical_performance
+            historical_performance,
+            industry
         )
         
         # 結果の構築
@@ -349,15 +364,22 @@ class ROIOptimizer:
                     f"{channel.upper()}チャネル: {abs(change_pct):.1f}%の{direction}を推奨"
                 )
         
-        # ROI関連の注釈
-        if predicted_roi > 3.0:
-            notes.append("高いROIが期待できる優良な予算配分です")
+        # ROI関連の詳細分析
+        if predicted_roi > 4.0:
+            notes.append("優秀なROI（4.0x以上）！積極的なスケール拡大を検討してください")
+        elif predicted_roi > 2.5:
+            notes.append("良好なROI（2.5x以上）。現在の戦略を継続しつつ微調整を実施")
         elif predicted_roi > 1.5:
-            notes.append("適切なROIが見込まれます")
-        elif predicted_roi > 0.5:
-            notes.append("ROIが低めです。チャネル戦略の見直しを推奨")
+            notes.append("標準的なROI（1.5x以上）。さらなる効率改善の余地があります")
         else:
-            notes.append("ROI改善が必要です。キャンペーン設計を再検討してください")
+            notes.append("ROI改善が必要。高効率チャネルへの予算再配分を強く推奨")
+        
+        # 具体的な戦術提案
+        best_channel = max(optimal_allocation.keys(), key=lambda k: optimal_allocation[k])
+        notes.append(f"{best_channel.upper()}が最も投資効率の高いチャネルです")
+        
+        # タイミング・実施提案
+        notes.append("実施タイミングは顧客の購買サイクルに合わせて調整してください")
         
         # 一般的な推奨事項
         notes.extend([
@@ -459,3 +481,16 @@ class ROIOptimizer:
             "budget": total_budget,
             "expected_lift": np.random.uniform(0.05, 0.25)  # 5-25%の期待上昇率
         }
+    
+    def _update_channel_baselines_from_demo(self, industry_benchmarks: Dict[str, Any]) -> None:
+        """デモデータから取得したベンチマークでチャネルベースラインを更新"""
+        channels_data = industry_benchmarks.get("channels", {})
+        
+        for channel_name, channel_data in channels_data.items():
+            if channel_name in self.channel_baselines:
+                # デモデータからCPM、CTR、CVRを更新
+                self.channel_baselines[channel_name].update({
+                    'cpm': channel_data.get('cpm', self.channel_baselines[channel_name]['cpm']),
+                    'ctr': channel_data.get('ctr', self.channel_baselines[channel_name]['ctr']),
+                    'cvr': channel_data.get('cvr', self.channel_baselines[channel_name]['cvr'])
+                })

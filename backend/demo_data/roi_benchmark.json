@@ -1,0 +1,107 @@
+{
+  "industry_benchmarks": {
+    "technology": {
+      "average_roi": 4.2,
+      "channels": {
+        "sns": {"roi": 3.8, "cpm": 18.5, "ctr": 0.028, "cvr": 0.024},
+        "video": {"roi": 4.5, "cpm": 22.0, "ctr": 0.038, "cvr": 0.029},
+        "search": {"roi": 5.1, "cpm": 28.0, "ctr": 0.052, "cvr": 0.041}
+      },
+      "budget_allocation": {
+        "sns": 0.35,
+        "video": 0.40,
+        "search": 0.25
+      }
+    },
+    "retail": {
+      "average_roi": 6.8,
+      "channels": {
+        "sns": {"roi": 6.2, "cpm": 12.5, "ctr": 0.032, "cvr": 0.045},
+        "video": {"roi": 7.1, "cpm": 16.0, "ctr": 0.041, "cvr": 0.052},
+        "search": {"roi": 7.5, "cpm": 24.0, "ctr": 0.048, "cvr": 0.058}
+      },
+      "budget_allocation": {
+        "sns": 0.45,
+        "video": 0.30,
+        "search": 0.25
+      }
+    },
+    "finance": {
+      "average_roi": 3.1,
+      "channels": {
+        "sns": {"roi": 2.8, "cpm": 22.0, "ctr": 0.018, "cvr": 0.015},
+        "video": {"roi": 3.2, "cpm": 28.0, "ctr": 0.025, "cvr": 0.019},
+        "search": {"roi": 3.6, "cpm": 35.0, "ctr": 0.035, "cvr": 0.025}
+      },
+      "budget_allocation": {
+        "sns": 0.25,
+        "video": 0.35,
+        "search": 0.40
+      }
+    }
+  },
+  "campaign_performance_data": [
+    {
+      "campaign_id": "DEMO_001",
+      "industry": "technology",
+      "budget": 1000000,
+      "duration_days": 60,
+      "channels": {
+        "sns": {"spend": 350000, "impressions": 1890000, "clicks": 52920, "conversions": 1270},
+        "video": {"spend": 400000, "impressions": 1818000, "clicks": 69084, "conversions": 2003},
+        "search": {"spend": 250000, "spend_per_click": 28.5, "clicks": 8772, "conversions": 360}
+      },
+      "results": {
+        "total_revenue": 4200000,
+        "total_roi": 4.2,
+        "awareness_lift": 0.23,
+        "brand_recall": 0.67
+      }
+    },
+    {
+      "campaign_id": "DEMO_002", 
+      "industry": "retail",
+      "budget": 2000000,
+      "duration_days": 45,
+      "channels": {
+        "sns": {"spend": 900000, "impressions": 7200000, "clicks": 230400, "conversions": 10368},
+        "video": {"spend": 600000, "impressions": 3750000, "clicks": 153750, "conversions": 7995},
+        "search": {"spend": 500000, "spend_per_click": 24.0, "clicks": 20833, "conversions": 1208}
+      },
+      "results": {
+        "total_revenue": 13600000,
+        "total_roi": 6.8,
+        "awareness_lift": 0.31,
+        "brand_recall": 0.74
+      }
+    }
+  ],
+  "optimization_patterns": {
+    "high_performers": {
+      "characteristics": [
+        "多チャネル統合アプローチ",
+        "ターゲティング精度の高さ",
+        "クリエイティブの最適化",
+        "リアルタイム調整"
+      ],
+      "success_factors": {
+        "targeting_precision": 0.85,
+        "creative_relevance": 0.78,
+        "channel_synergy": 0.72,
+        "budget_flexibility": 0.69
+      }
+    },
+    "common_mistakes": [
+      "単一チャネルへの過度な依存",
+      "ターゲティングの曖昧さ",
+      "クリエイティブの更新頻度不足",
+      "予算配分の硬直性"
+    ]
+  },
+  "seasonal_trends": {
+    "Q1": {"multiplier": 0.85, "focus": "新年・新生活"},
+    "Q2": {"multiplier": 1.1, "focus": "春・新商品"},
+    "Q3": {"multiplier": 0.95, "focus": "夏・バケーション"},
+    "Q4": {"multiplier": 1.25, "focus": "年末・ホリデー"}
+  }
+}

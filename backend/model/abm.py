@@ -8,7 +8,7 @@ from mesa.datacollection import DataCollector
 from typing import Dict, List, Optional, Any
 from enum import IntEnum
 
-from ..schemas import (
+from schemas import (
     KPICategory, MediaMix, WordOfMouthConfig, PersonalityConfig, 
     DemographicConfig, InfluencerConfig, PersonalityType
 )

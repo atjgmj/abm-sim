@@ -5,13 +5,14 @@ import { RunPanel } from './components/RunPanel';
 import { Dashboard } from './components/Dashboard';
 import { ParameterCalibration } from './components/ParameterCalibration';
 import { ProductOverview } from './components/ProductOverview';
+import ExternalDataManager from './components/ExternalDataManager';
 import { ScenarioRequest, RunResponse, ResultsResponse } from './types';
 
 function App() {
   const [currentScenario, setCurrentScenario] = useState<ScenarioRequest | null>(null);
   const [currentRun, setCurrentRun] = useState<RunResponse | null>(null);
   const [results, setResults] = useState<ResultsResponse | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'scenario' | 'calibrate' | 'network' | 'run' | 'results'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'scenario' | 'calibrate' | 'network' | 'run' | 'results' | 'external'>('overview');
 
   const handleScenarioCreated = (scenario: ScenarioRequest) => {
     setCurrentScenario(scenario);
@@ -52,6 +53,7 @@ function App() {
             { id: 'overview', label: '製品概要', enabled: true },
             { id: 'scenario', label: 'Scenario Setup', enabled: true },
             { id: 'calibrate', label: 'Smart Calibration', enabled: !!currentScenario },
+            { id: 'external', label: 'External Data', enabled: true },
             { id: 'network', label: 'Network Preview', enabled: !!currentScenario },
             { id: 'run', label: 'Simulation Run', enabled: !!currentScenario },
             { id: 'results', label: 'Results', enabled: !!results },
@@ -93,6 +95,12 @@ function App() {
                 scenario={currentScenario}
                 onCalibratedScenario={handleCalibratedScenario}
               />
+            </div>
+          )}
+
+          {activeTab === 'external' && (
+            <div className="p-6">
+              <ExternalDataManager />
             </div>
           )}
 

@@ -6,6 +6,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
 import json
+from demo_data.loader import demo_loader
 
 class IndustryType(str, Enum):
     TECHNOLOGY = "technology"
@@ -100,30 +101,67 @@ class CompetitorAnalyzer:
     ) -> CompetitorAnalysis:
         """競合分析を実行"""
         
-        # シミュレーション用のダミー競合データ生成
-        competitors = self._generate_synthetic_competitors(industry)
-        
-        # 市場ポジション分析
-        market_position = self._analyze_market_position(competitors)
-        
-        # SWOT分析
-        strengths, opportunities, threats = self._perform_swot_analysis(
-            industry, competitors
-        )
-        
-        # 戦略提案
-        strategies = self._generate_strategies(industry, market_position, opportunities)
-        
-        return CompetitorAnalysis(
-            target_company="Your Company",
-            industry=industry,
-            competitors=competitors,
-            market_position=market_position,
-            strengths=strengths,
-            opportunities=opportunities,
-            threats=threats,
-            recommended_strategies=strategies
-        )
+        try:
+            # デモデータから競合情報を取得
+            competitor_data = demo_loader.load_competitor_data(industry.value)
+            industry_data = competitor_data.get("industry_data", {})
+            
+            # デモデータから競合他社情報を構築
+            competitors = []
+            market_leaders = industry_data.get("market_leaders", [])
+            
+            for leader in market_leaders:
+                competitors.append(CompetitorMetric(
+                    company=leader["company"],
+                    awareness_rate=leader["awareness_rate"],
+                    market_share=leader["market_share"],
+                    social_engagement=leader["social_engagement"],
+                    media_spend=leader["media_spend"],
+                    conversion_rate=leader["conversion_rate"]
+                ))
+            
+            # 市場ポジション分析
+            market_position = self._analyze_market_position_from_demo(industry_data)
+            
+            # SWOT分析（デモデータベース）
+            strengths, opportunities, threats = self._perform_swot_analysis_from_demo(
+                industry_data, competitor_data.get("competitive_intelligence", {})
+            )
+            
+            # 戦略提案
+            strategies = self._generate_strategies_from_demo(industry_data, keywords)
+            
+            return CompetitorAnalysis(
+                target_company="Your Company",
+                industry=industry,
+                competitors=competitors,
+                market_position=market_position,
+                strengths=strengths,
+                opportunities=opportunities,
+                threats=threats,
+                recommended_strategies=strategies
+            )
+            
+        except Exception as e:
+            print(f"Debug: Error in analyze_competitors: {e}")
+            import traceback
+            traceback.print_exc()
+            # フォールバック: 従来のシンプルな生成方式
+            competitors = self._generate_synthetic_competitors(industry)
+            market_position = self._analyze_market_position(competitors)
+            strengths, opportunities, threats = self._perform_swot_analysis(industry, competitors)
+            strategies = self._generate_strategies(industry, market_position, opportunities)
+            
+            return CompetitorAnalysis(
+                target_company="Your Company",
+                industry=industry,
+                competitors=competitors,
+                market_position=market_position,
+                strengths=strengths,
+                opportunities=opportunities,
+                threats=threats,
+                recommended_strategies=strategies
+            )
     
     def _generate_synthetic_competitors(self, industry: IndustryType) -> List[CompetitorMetric]:
         """業界に応じた合成競合データを生成"""
@@ -132,10 +170,35 @@ class CompetitorAnalyzer:
             benchmark = self.industry_benchmarks[IndustryType.TECHNOLOGY]
         
         competitors = []
-        company_names = [
-            "Market Leader Corp", "Innovation Inc", "Growth Co", 
-            "Established Ltd", "Challenger Startup"
-        ]
+        # 業界別に異なる競合企業名を生成
+        company_templates = {
+            IndustryType.TECHNOLOGY: [
+                "TechGiant Solutions", "CloudInnovate Corp", "DataDriven Inc", 
+                "NextGen Systems", "AI Pioneer Ltd"
+            ],
+            IndustryType.RETAIL: [
+                "MegaMart Chain", "Fashion Forward Co", "Digital Commerce Inc",
+                "Customer First Retail", "Trendy Lifestyle Ltd"
+            ],
+            IndustryType.FINANCE: [
+                "Global Finance Group", "Digital Banking Corp", "Investment Pro Inc",
+                "FinTech Innovators", "Secure Capital Ltd"
+            ],
+            IndustryType.HEALTHCARE: [
+                "HealthCare Prime", "MedTech Solutions", "Wellness First Corp",
+                "Digital Health Inc", "Care Innovation Ltd"
+            ],
+            IndustryType.EDUCATION: [
+                "EduTech Leaders", "Learning Solutions Corp", "Knowledge Hub Inc",
+                "Future Education Co", "Smart Learning Ltd"
+            ],
+            IndustryType.AUTOMOTIVE: [
+                "AutoTech Corp", "Mobility Solutions Inc", "Smart Cars Co",
+                "Electric Future Ltd", "DriveInnovation Group"
+            ]
+        }
+        
+        company_names = company_templates.get(industry, company_templates[IndustryType.TECHNOLOGY])
         
         for i, name in enumerate(company_names):
             # 業界平均を基準にバリエーションを生成
@@ -298,3 +361,70 @@ class CompetitorAnalyzer:
             ]
         }
         return factors_map.get(industry, factors_map[IndustryType.TECHNOLOGY])
+    
+    def _analyze_market_position_from_demo(self, industry_data: Dict[str, Any]) -> str:
+        """デモデータから市場ポジションを分析"""
+        market_trends = industry_data.get("market_trends", {})
+        growth_rate = market_trends.get("growth_rate", 0.1)
+        
+        if growth_rate > 0.12:
+            return "成長市場での新規参入機会"
+        elif growth_rate > 0.08:
+            return "安定成長市場でのポジション確立"
+        else:
+            return "成熟市場での差別化戦略"
+    
+    def _perform_swot_analysis_from_demo(self, industry_data: Dict, competitive_intel: Dict) -> tuple:
+        """デモデータからSWOT分析を実行"""
+        market_trends = industry_data.get("market_trends", {})
+        key_trends = market_trends.get("key_trends", [])
+        customer_priorities = market_trends.get("customer_priorities", [])
+        
+        # 強み（業界トレンドに基づく）
+        strengths = [
+            f"{trend}への対応力" for trend in key_trends[:2]
+        ] + ["データドリブンなアプローチ", "革新的な技術活用"]
+        
+        # 機会（顧客ニーズと市場動向から）
+        opportunities = [
+            f"{priority}の向上ニーズへの対応" for priority in customer_priorities[:2]
+        ] + [f"{trend}市場の拡大" for trend in key_trends[:1]]
+        
+        # 脅威（競争環境から）
+        threats = [
+            "既存企業の市場支配力",
+            "価格競争の激化",
+            "技術変化のスピード",
+            "顧客期待値の上昇"
+        ]
+        
+        return strengths[:4], opportunities[:4], threats[:4]
+    
+    def _generate_strategies_from_demo(self, industry_data: Dict, keywords: List[str]) -> List[str]:
+        """デモデータとキーワードから戦略を生成"""
+        market_trends = industry_data.get("market_trends", {})
+        key_trends = market_trends.get("key_trends", [])
+        customer_priorities = market_trends.get("customer_priorities", [])
+        
+        strategies = []
+        
+        # トレンドベース戦略
+        if key_trends:
+            strategies.append(f"{key_trends[0]}を活用した差別化戦略")
+        
+        # 顧客重視戦略
+        if customer_priorities:
+            strategies.append(f"{customer_priorities[0]}に特化したサービス開発")
+        
+        # キーワードベース戦略
+        if keywords:
+            strategies.append(f"{', '.join(keywords[:2])}を軸としたブランディング強化")
+        
+        # 一般的戦略
+        strategies.extend([
+            "デジタルマーケティングの最適化",
+            "顧客体験の向上とロイヤリティ構築",
+            "データ分析による継続的な改善"
+        ])
+        
+        return strategies[:6]

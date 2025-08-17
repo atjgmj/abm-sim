@@ -325,6 +325,415 @@ export const ProductOverview: React.FC = () => {
             </div>
           </div>
 
+          {/* Demographic Theory */}
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg mb-8">
+            <h3 className="text-xl font-bold text-green-900 mb-4 flex items-center">
+              <Users className="h-6 w-6 mr-2" />
+              人口統計学的パラメータの理論的基盤
+            </h3>
+            <p className="text-green-800 mb-6">
+              本システムでは、個々の顧客エージェントが多次元の人口統計学的特性を持ち、
+              これらがメディア受容性、社会的影響力、購買行動に複合的に影響します。
+              Rogers の拡散理論を基盤とした心理学的プロファイルと人口統計学的属性の統合モデルを採用しています。
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-3 flex items-center">
+                  <Target className="h-4 w-4 mr-2" />
+                  人口統計学的属性
+                </h4>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <strong className="text-blue-700">年齢層 (Age Group)</strong>
+                    <div className="text-gray-600 mt-1">1-5スケール（若年〜高齢）</div>
+                    <div className="text-xs text-gray-500 bg-gray-50 p-2 rounded mt-1">
+                      影響: メディア親和性、リスク許容度、新商品への開放性
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-blue-700">所得レベル (Income Level)</strong>
+                    <div className="text-gray-600 mt-1">1-5スケール（低所得〜高所得）</div>
+                    <div className="text-xs text-gray-500 bg-gray-50 p-2 rounded mt-1">
+                      影響: 購買力、検索広告反応性、社会的影響力
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-blue-700">都市部-地方 (Urban-Rural)</strong>
+                    <div className="text-gray-600 mt-1">連続値 [0,1]（地方〜都市部）</div>
+                    <div className="text-xs text-gray-500 bg-gray-50 p-2 rounded mt-1">
+                      影響: メディア接触機会、ネットワーク密度、情報感度
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-blue-700">教育レベル (Education)</strong>
+                    <div className="text-gray-600 mt-1">1-5スケール（基礎〜大学院）</div>
+                    <div className="text-xs text-gray-500 bg-gray-50 p-2 rounded mt-1">
+                      影響: 情報処理能力、検索行動、批判的思考
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-3 flex items-center">
+                  <Brain className="h-4 w-4 mr-2" />
+                  性格特性 (Rogers拡散理論)
+                </h4>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <strong className="text-purple-700">イノベーター (2.5%)</strong>
+                    <div className="text-xs text-gray-500 bg-purple-50 p-2 rounded mt-1">
+                      高開放性、低社会影響、高リスク許容度
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-blue-700">アーリーアダプター (13.5%)</strong>
+                    <div className="text-xs text-gray-500 bg-blue-50 p-2 rounded mt-1">
+                      中高開放性、中低社会影響、中高リスク許容度
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-green-700">アーリーマジョリティ (34%)</strong>
+                    <div className="text-xs text-gray-500 bg-green-50 p-2 rounded mt-1">
+                      中開放性、中高社会影響、中リスク許容度
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-yellow-700">レイトマジョリティ (34%)</strong>
+                    <div className="text-xs text-gray-500 bg-yellow-50 p-2 rounded mt-1">
+                      中低開放性、高社会影響、中低リスク許容度
+                    </div>
+                  </div>
+                  <div>
+                    <strong className="text-red-700">ラガード (16%)</strong>
+                    <div className="text-xs text-gray-500 bg-red-50 p-2 rounded mt-1">
+                      低開放性、非常に高い社会影響、低リスク許容度
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Parameter Integration Model */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <GitBranch className="h-6 w-6 text-indigo-600 mr-2" />
+              パラメータ統合モデル
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-blue-800 mb-3">関心度計算式</h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-white p-2 rounded font-mono text-xs">
+                    Interest = Openness×0.6 + Risk×0.4 + Age_factor×0.2 + Education×0.1
+                  </div>
+                  <div className="text-blue-700">
+                    <strong>Age_factor:</strong> (6-年齢層)/5 × 0.2<br/>
+                    <strong>Education:</strong> 教育レベル/5 × 0.1
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-3">受容性計算式</h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-white p-2 rounded font-mono text-xs">
+                    Receptivity = Media_Affinity×0.7 + Openness×0.3 + Urban×0.1
+                  </div>
+                  <div className="text-green-700">
+                    <strong>Media_Affinity:</strong> メディア親和性 [0,1]<br/>
+                    <strong>Urban:</strong> 都市部度 × 0.1
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-purple-800 mb-3">影響力計算式</h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-white p-2 rounded font-mono text-xs">
+                    Influence = Social×0.4 + Education×0.3 + Income×0.3
+                  </div>
+                  <div className="text-purple-700">
+                    <strong>Social:</strong> 社会的影響性<br/>
+                    <strong>インフルエンサー:</strong> ×3.0倍率
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold text-gray-800 mb-2">チャネル別人口統計学調整</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <strong className="text-blue-600">SNS チャネル:</strong>
+                  <div className="text-gray-600 mt-1">
+                    • 年齢: 若年層 +50%効果<br/>
+                    • 都市部: +30%露出確率<br/>
+                    • 教育: 高学歴 +30%
+                  </div>
+                </div>
+                <div>
+                  <strong className="text-red-600">動画チャネル:</strong>
+                  <div className="text-gray-600 mt-1">
+                    • 年齢: 若年層 +30%<br/>
+                    • 所得: 高所得 +20%<br/>
+                    • より普遍的な訴求
+                  </div>
+                </div>
+                <div>
+                  <strong className="text-green-600">検索チャネル:</strong>
+                  <div className="text-gray-600 mt-1">
+                    • 教育: +40%効果<br/>
+                    • 所得: +30%効果<br/>
+                    • 能動的な情報探索
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Parameter Impact Analysis */}
+          <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg mb-8">
+            <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center">
+              <BarChart3 className="h-6 w-6 mr-2" />
+              パラメータ影響度分析
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-orange-800 mb-3">関心度への影響重み</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Openness（開放性）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{width: '60%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">60%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Risk Tolerance（リスク許容度）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-green-600 h-2 rounded-full" style={{width: '40%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">40%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Age Factor（年齢要因）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-yellow-600 h-2 rounded-full" style={{width: '20%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">20%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Education（教育レベル）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-purple-600 h-2 rounded-full" style={{width: '10%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">10%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-orange-800 mb-3">メディア受容性への影響重み</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Media Affinity（メディア親和性）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{width: '70%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">70%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Openness（開放性）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-green-600 h-2 rounded-full" style={{width: '30%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">30%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm">Urban Factor（都市部要因）</span>
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div className="bg-yellow-600 h-2 rounded-full" style={{width: '10%'}}></div>
+                      </div>
+                      <span className="text-xs font-mono">10%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 bg-white p-5 rounded-lg">
+              <h4 className="font-semibold text-orange-800 mb-3">社会的影響力への影響重み</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Social Influence</span>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
+                      <div className="bg-purple-600 h-2 rounded-full" style={{width: '40%'}}></div>
+                    </div>
+                    <span className="text-xs font-mono">40%</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Education</span>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
+                      <div className="bg-blue-600 h-2 rounded-full" style={{width: '30%'}}></div>
+                    </div>
+                    <span className="text-xs font-mono">30%</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Income</span>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{width: '30%'}}></div>
+                    </div>
+                    <span className="text-xs font-mono">30%</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 p-3 bg-orange-50 rounded text-sm">
+                <strong>インフルエンサー倍率:</strong> 通常の影響力 × 3.0倍（インフルエンサー判定時）
+              </div>
+            </div>
+          </div>
+
+          {/* Network Simulation Details */}
+          <div className="bg-gradient-to-r from-cyan-50 to-blue-50 p-6 rounded-lg mb-8">
+            <h3 className="text-xl font-bold text-cyan-900 mb-4 flex items-center">
+              <Network className="h-6 w-6 mr-2" />
+              ネットワーク理論とシミュレーション実装
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-cyan-800 mb-3 flex items-center">
+                  <span className="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
+                  Erdős-Rényi
+                </h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-orange-50 p-2 rounded text-xs font-mono">
+                    P(edge) = k/(n-1)<br/>
+                    ⟨k⟩ = np
+                  </div>
+                  <div className="text-gray-700">
+                    <strong>特徴:</strong> 均質なランダム接続<br/>
+                    <strong>用途:</strong> 基本的な情報拡散モデル<br/>
+                    <strong>WoM特性:</strong> 均等な拡散速度
+                  </div>
+                  <div className="bg-gray-50 p-2 rounded text-xs">
+                    <strong>実装:</strong> NetworkX.erdos_renyi_graph(n, p)<br/>
+                    <strong>パラメータ:</strong> n=ノード数, p=接続確率
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-cyan-800 mb-3 flex items-center">
+                  <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                  Watts-Strogatz
+                </h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-blue-50 p-2 rounded text-xs font-mono">
+                    C &gt;&gt; C_random<br/>
+                    L ≈ L_random
+                  </div>
+                  <div className="text-gray-700">
+                    <strong>特徴:</strong> 高クラスタ化 + 短経路<br/>
+                    <strong>用途:</strong> 現実的な社会ネットワーク<br/>
+                    <strong>WoM特性:</strong> クラスタ内高密度拡散
+                  </div>
+                  <div className="bg-gray-50 p-2 rounded text-xs">
+                    <strong>実装:</strong> NetworkX.watts_strogatz_graph(n, k, p)<br/>
+                    <strong>パラメータ:</strong> k=近傍数, p=再配線確率
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg">
+                <h4 className="font-semibold text-cyan-800 mb-3 flex items-center">
+                  <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                  Barabási-Albert
+                </h4>
+                <div className="text-sm space-y-2">
+                  <div className="bg-green-50 p-2 rounded text-xs font-mono">
+                    P(k) ∝ k⁻ᵞ<br/>
+                    γ ≈ 3
+                  </div>
+                  <div className="text-gray-700">
+                    <strong>特徴:</strong> ハブノード存在<br/>
+                    <strong>用途:</strong> インフルエンサー効果<br/>
+                    <strong>WoM特性:</strong> 急速な情報拡散
+                  </div>
+                  <div className="bg-gray-50 p-2 rounded text-xs">
+                    <strong>実装:</strong> NetworkX.barabasi_albert_graph(n, m)<br/>
+                    <strong>パラメータ:</strong> m=優先接続数
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-5 rounded-lg">
+              <h4 className="font-semibold text-cyan-800 mb-3">WoM拡散アルゴリズム詳細</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h5 className="font-medium text-cyan-700 mb-2">Step 1: WoM生成判定</h5>
+                  <div className="text-sm bg-cyan-50 p-3 rounded space-y-1">
+                    <div className="font-mono text-xs">for neighbor in network.neighbors(agent_id):</div>
+                    <div className="font-mono text-xs ml-4">if neighbor.state &gt;= LIKING:</div>
+                    <div className="font-mono text-xs ml-8">wom_prob = p_generate × influence × 0.1</div>
+                    <div className="font-mono text-xs ml-8">wom_prob *= (1 + similarity_bonus)</div>
+                    <div className="text-gray-600 mt-2">
+                      <strong>条件:</strong> 好意状態以上のエージェントが発信<br/>
+                      <strong>確率:</strong> 影響力と類似性に比例
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h5 className="font-medium text-cyan-700 mb-2">Step 2: WoM効果計算</h5>
+                  <div className="text-sm bg-cyan-50 p-3 rounded space-y-1">
+                    <div className="font-mono text-xs">base_effect = 0.05 × current_receptivity</div>
+                    <div className="font-mono text-xs">social_factor = personality['social_influence']</div>
+                    <div className="font-mono text-xs">influencer_factor = 2.0 if is_influencer else 1.0</div>
+                    <div className="font-mono text-xs">effect_prob = base_effect × social_factor × influencer_factor</div>
+                    <div className="text-gray-600 mt-2">
+                      <strong>要因:</strong> 受容性 × 社会的影響性 × インフルエンサー効果
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-4 p-3 bg-gray-50 rounded">
+                <h5 className="font-medium text-gray-800 mb-2">類似性ボーナス計算</h5>
+                <div className="text-sm font-mono text-gray-700">
+                  age_similarity = max(0, 1 - |age_diff| / 4.0)<br/>
+                  income_similarity = max(0, 1 - |income_diff| / 4.0)<br/>
+                  urban_similarity = max(0, 1 - |urban_diff|)<br/>
+                  similarity_bonus = (age_sim × 0.4 + income_sim × 0.3 + urban_sim × 0.3) × 0.3
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Core Models */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-6">コアモデル理論</h3>

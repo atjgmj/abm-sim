@@ -8,7 +8,7 @@ from typing import Dict, Any, Optional, List
 from datetime import datetime
 import pandas as pd
 
-from ..schemas import ScenarioRequest, RunStatus
+from schemas import ScenarioRequest, RunStatus
 
 
 class SimulationStore:

@@ -1,0 +1,130 @@
+{
+  "industries": {
+    "technology": {
+      "market_leaders": [
+        {
+          "company": "TechGiant Solutions",
+          "market_share": 0.28,
+          "awareness_rate": 0.85,
+          "social_engagement": 45000,
+          "media_spend": 12000000,
+          "conversion_rate": 0.034,
+          "strengths": ["技術革新", "ブランド認知度", "グローバル展開"],
+          "positioning": "技術革新のリーダー"
+        },
+        {
+          "company": "CloudInnovate Corp",
+          "market_share": 0.22,
+          "awareness_rate": 0.71,
+          "social_engagement": 32000,
+          "media_spend": 8500000,
+          "conversion_rate": 0.041,
+          "strengths": ["クラウドサービス", "コスト効率", "顧客サポート"],
+          "positioning": "クラウド特化型"
+        },
+        {
+          "company": "DataDriven Inc",
+          "market_share": 0.18,
+          "awareness_rate": 0.63,
+          "social_engagement": 28000,
+          "media_spend": 6800000,
+          "conversion_rate": 0.038,
+          "strengths": ["データ分析", "AI活用", "専門性"],
+          "positioning": "データ分析のエキスパート"
+        }
+      ],
+      "market_trends": {
+        "growth_rate": 0.15,
+        "key_technologies": ["AI/ML", "クラウド", "IoT", "セキュリティ"],
+        "customer_priorities": ["効率化", "コスト削減", "スケーラビリティ"]
+      }
+    },
+    "retail": {
+      "market_leaders": [
+        {
+          "company": "MegaMart Chain",
+          "market_share": 0.31,
+          "awareness_rate": 0.92,
+          "social_engagement": 78000,
+          "media_spend": 25000000,
+          "conversion_rate": 0.067,
+          "strengths": ["店舗網", "価格競争力", "商品の豊富さ"],
+          "positioning": "総合小売のリーダー"
+        },
+        {
+          "company": "Fashion Forward Co",
+          "market_share": 0.19,
+          "awareness_rate": 0.76,
+          "social_engagement": 52000,
+          "media_spend": 15000000,
+          "conversion_rate": 0.058,
+          "strengths": ["トレンド感度", "デザイン力", "SNS活用"],
+          "positioning": "ファッショントレンドリーダー"
+        },
+        {
+          "company": "Digital Commerce Inc",
+          "market_share": 0.24,
+          "awareness_rate": 0.68,
+          "social_engagement": 41000,
+          "media_spend": 18000000,
+          "conversion_rate": 0.072,
+          "strengths": ["EC強化", "配送網", "デジタル体験"],
+          "positioning": "オムニチャネル小売"
+        }
+      ],
+      "market_trends": {
+        "growth_rate": 0.08,
+        "key_trends": ["オムニチャネル", "パーソナライゼーション", "サステナビリティ"],
+        "customer_priorities": ["利便性", "価格", "品質", "体験"]
+      }
+    },
+    "finance": {
+      "market_leaders": [
+        {
+          "company": "NextGen Bank",
+          "market_share": 0.26,
+          "awareness_rate": 0.81,
+          "social_engagement": 23000,
+          "media_spend": 14000000,
+          "conversion_rate": 0.028,
+          "strengths": ["デジタルバンキング", "セキュリティ", "顧客体験"],
+          "positioning": "デジタルファーストバンク"
+        },
+        {
+          "company": "Secure Finance Corp",
+          "market_share": 0.22,
+          "awareness_rate": 0.75,
+          "social_engagement": 18000,
+          "media_spend": 11000000,
+          "conversion_rate": 0.031,
+          "strengths": ["信頼性", "安定性", "法人向けサービス"],
+          "positioning": "信頼と安定の金融機関"
+        }
+      ],
+      "market_trends": {
+        "growth_rate": 0.06,
+        "key_trends": ["フィンテック", "デジタル決済", "ロボアドバイザー"],
+        "customer_priorities": ["セキュリティ", "利便性", "手数料"]
+      }
+    }
+  },
+  "competitive_intelligence": {
+    "pricing_strategies": {
+      "premium": {"share": 0.25, "avg_margin": 0.35},
+      "competitive": {"share": 0.45, "avg_margin": 0.22},
+      "budget": {"share": 0.30, "avg_margin": 0.15}
+    },
+    "marketing_channels": {
+      "digital": 0.65,
+      "traditional": 0.25,
+      "events": 0.10
+    },
+    "innovation_areas": [
+      "AI・機械学習の活用",
+      "顧客体験の向上",
+      "サステナビリティ",
+      "デジタル変革",
+      "パーソナライゼーション"
+    ]
+  }
+}

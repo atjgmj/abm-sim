@@ -3,7 +3,7 @@
 import networkx as nx
 import numpy as np
 from typing import Dict, List, Tuple, Any
-from ..schemas import NetworkType, NetworkNode, NetworkEdge
+from schemas import NetworkType, NetworkNode, NetworkEdge
 
 
 def generate_network(network_type: NetworkType, n: int, k: int, beta: float = 0.1, seed: int = 42) -> nx.Graph:

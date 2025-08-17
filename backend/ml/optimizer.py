@@ -15,8 +15,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 import optuna
 from optuna.samplers import TPESampler
 
-from ..schemas import ScenarioRequest, KPICategory
-from ..store.db import SimulationStore
+from schemas import ScenarioRequest, KPICategory
+from store.db import SimulationStore
 
 logger = logging.getLogger(__name__)
 
@@ -97,10 +97,10 @@ class ParameterOptimizer:
         
         # Demographics features
         features.extend([
-            scenario.demographics.age_group,
-            scenario.demographics.income_level,
-            scenario.demographics.urban_rural,
-            scenario.demographics.education_level,
+            float(scenario.demographics.age_group),
+            float(scenario.demographics.income_level),
+            float(scenario.demographics.urban_rural),
+            float(scenario.demographics.education_level),
         ])
         
         # Influencer features

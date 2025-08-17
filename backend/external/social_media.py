@@ -11,7 +11,8 @@ import aiohttp
 import numpy as np
 from pydantic import BaseModel
 
-from ..schemas import PersonalityConfig, DemographicConfig, MediaMix
+from schemas import PersonalityConfig, DemographicConfig, MediaMix
+from demo_data.loader import demo_loader
 
 logger = logging.getLogger(__name__)
 
@@ -128,34 +129,46 @@ class SocialMediaAnalyzer:
         )
     
     async def get_trending_topics(self, limit: int = 10) -> List[TrendingTopic]:
-        """Get current trending topics."""
-        # Simulate trending topic detection
-        sample_topics = [
-            "sustainability", "AI technology", "remote work", "health wellness",
-            "electric vehicles", "cryptocurrency", "climate change", "education",
-            "digital marketing", "entrepreneurship"
-        ]
-        
-        topics = []
-        for i in range(min(limit, len(sample_topics))):
-            topic = sample_topics[i]
-            topics.append(TrendingTopic(
-                keyword=topic,
-                volume=np.random.randint(1000, 100000),
-                sentiment=np.random.normal(0.1, 0.3),
-                demographics={
-                    'age_groups': {
-                        '18-24': np.random.uniform(0.1, 0.4),
-                        '25-34': np.random.uniform(0.2, 0.4),
-                        '35-44': np.random.uniform(0.15, 0.3),
-                        '45-54': np.random.uniform(0.1, 0.25),
-                        '55+': np.random.uniform(0.05, 0.2)
-                    }
-                },
-                growth_rate=np.random.uniform(-0.2, 0.5)
-            ))
-        
-        return sorted(topics, key=lambda x: x.volume, reverse=True)
+        """Get current trending topics from demo data."""
+        try:
+            # Load trending topics from demo data
+            trends_data = demo_loader.load_social_media_trends()
+            trending_topics = trends_data.get("trending_topics", [])
+            
+            topics = []
+            for topic_data in trending_topics[:limit]:
+                # Convert age group data from demo format
+                age_groups = {}
+                demo_age_data = trends_data.get("demographic_insights", {}).get("age_groups", {})
+                for age_range, data in demo_age_data.items():
+                    age_groups[age_range] = data.get("engagement_rate", 0.5)
+                
+                topics.append(TrendingTopic(
+                    keyword=topic_data["keyword"],
+                    volume=topic_data["volume"],
+                    sentiment=topic_data["sentiment"],
+                    demographics={
+                        'age_groups': age_groups if age_groups else {
+                            '18-24': 0.3, '25-34': 0.35, '35-44': 0.2, '45-54': 0.1, '55+': 0.05
+                        }
+                    },
+                    growth_rate=topic_data["growth_rate"]
+                ))
+            
+            return sorted(topics, key=lambda x: x.volume, reverse=True)
+            
+        except Exception as e:
+            logger.warning(f"Failed to load demo trending topics: {e}")
+            # Fallback to simple mock data
+            return [
+                TrendingTopic(
+                    keyword="デモトレンド",
+                    volume=50000,
+                    sentiment=0.6,
+                    demographics={'age_groups': {'18-24': 0.3, '25-34': 0.35, '35-44': 0.2, '45-54': 0.1, '55+': 0.05}},
+                    growth_rate=0.15
+                )
+            ]
 
 
 class ParameterCalibrator:

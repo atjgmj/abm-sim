@@ -5,31 +5,36 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
 from typing import Dict, Any, Optional
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
-from .schemas import (
+from schemas import (
     ScenarioRequest, ScenarioResponse, RunRequest, RunResponse,
     RunStatusResponse, ResultsResponse, NetworkPreviewResponse,
-    RunStatus, NetworkConfig, KPICategory
+    RunStatus, NetworkConfig, KPICategory, MediaMix, MediaChannel,
+    WordOfMouthConfig, PersonalityConfig, DemographicConfig, InfluencerConfig
 )
-from .external.social_media import (
+from external.social_media import (
     ParameterCalibrator, ExternalDataRequest, CalibratedParametersResponse
 )
-from .external.competitor_analysis import CompetitorAnalyzer, IndustryType
-from .external.roi_optimizer import ROIOptimizer
-from .ml.optimizer import (
+from external.competitor_analysis import CompetitorAnalyzer, IndustryType
+from external.roi_optimizer import ROIOptimizer
+from external.data_sources import external_data_manager, DataSourceType, DataSourceStatus
+from ml.optimizer import (
     ParameterOptimizer, OptimizationTarget, OptimizationRequest, OptimizationResponse
 )
-from .model.network import generate_network, network_to_preview
-from .model.abm import CommunicationModel
-from .store.db import SimulationStore
+from ml.training_generator import TrainingDataGenerator
+from model.network import generate_network, network_to_preview
+from model.abm import CommunicationModel
+from store.db import SimulationStore
 
 # Global state
 store = SimulationStore()
 executor = ThreadPoolExecutor(max_workers=2)  # Limit concurrent simulations
 running_simulations: Dict[str, asyncio.Task] = {}
+optimizer = ParameterOptimizer(store)
+training_generator = TrainingDataGenerator(store)
 
 
 @asynccontextmanager
@@ -330,7 +335,7 @@ async def calibrate_parameters(request: ExternalDataRequest):
 async def get_trending_topics(limit: int = 10):
     """Get current trending topics for campaign keyword suggestions."""
     try:
-        from .external.social_media import SocialMediaAnalyzer
+        from external.social_media import SocialMediaAnalyzer
         
         async with SocialMediaAnalyzer() as analyzer:
             trends = await analyzer.get_trending_topics(limit)
@@ -481,15 +486,8 @@ async def optimize_parameters(request: dict):
 async def get_training_data_status():
     """Get status of available training data for ML optimization."""
     try:
-        optimizer = ParameterOptimizer(store)
-        simulations = store.get_all_simulations()
-        
-        return {
-            "total_simulations": len(simulations),
-            "suitable_for_training": len(simulations) >= 10,
-            "recommended_minimum": 20,
-            "data_quality": "Good" if len(simulations) >= 20 else "Limited" if len(simulations) >= 10 else "Insufficient"
-        }
+        status = training_generator.get_training_data_status()
+        return status.to_dict()
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get training data status: {str(e)}")
@@ -502,75 +500,133 @@ async def generate_training_data(request: dict, background_tasks: BackgroundTask
         base_scenario = ScenarioRequest(**request.get('base_scenario', {}))
         num_variants = request.get('num_variants', 15)
         
-        # Generate parameter variants
-        variants = []
-        import random
-        random.seed(42)
+        # Use the training generator
+        async def run_training_generation():
+            return await training_generator.generate_training_data(base_scenario, num_variants)
         
-        for i in range(num_variants):
-            variant = base_scenario.model_copy(deep=True)
-            
-            # Vary media mix
-            sns_share = random.uniform(0.2, 0.6)
-            video_share = random.uniform(0.2, 0.5)
-            search_share = random.uniform(0.1, 0.4)
-            
-            # Normalize shares
-            total = sns_share + video_share + search_share
-            variant.media_mix.sns.share = sns_share / total
-            variant.media_mix.video.share = video_share / total
-            variant.media_mix.search.share = search_share / total
-            
-            # Vary alphas
-            variant.media_mix.sns.alpha = random.uniform(0.02, 0.08)
-            variant.media_mix.video.alpha = random.uniform(0.01, 0.05)
-            variant.media_mix.search.alpha = random.uniform(0.005, 0.03)
-            
-            # Vary WoM parameters
-            variant.wom.p_generate = random.uniform(0.05, 0.15)
-            variant.wom.decay = random.uniform(0.8, 0.95)
-            variant.wom.personality_weight = random.uniform(0.2, 0.5)
-            variant.wom.demographic_weight = random.uniform(0.1, 0.4)
-            
-            # Vary personality
-            variant.personality.openness = random.uniform(0.3, 0.7)
-            variant.personality.social_influence = random.uniform(0.3, 0.7)
-            variant.personality.media_affinity = random.uniform(0.3, 0.7)
-            variant.personality.risk_tolerance = random.uniform(0.3, 0.7)
-            
-            # Vary influencers
-            variant.influencers.enable_influencers = random.choice([True, False])
-            variant.influencers.influencer_ratio = random.uniform(0.01, 0.04)
-            variant.influencers.influence_multiplier = random.uniform(2.0, 4.0)
-            
-            # Vary network size
-            variant.network.n = random.choice([5000, 8000, 10000, 12000])
-            variant.network.k = random.choice([4, 6, 8, 10])
-            
-            # Set unique name
-            variant.name = f"Training_Variant_{i+1}"
-            variant.seed = 42 + i
-            
-            variants.append(variant)
+        # Run in background
+        background_tasks.add_task(run_training_generation)
         
-        # Save scenarios and queue runs
-        variant_runs = []
-        for variant in variants:
-            scenario_id = store.save_scenario(variant)
-            run_id = store.create_run(scenario_id)
-            
-            # Start background simulation
-            background_tasks.add_task(run_simulation, run_id, variant)
-            variant_runs.append({"scenario_id": scenario_id, "run_id": run_id})
+        from ml.training_generator import calculate_estimated_time
+        estimated_time = calculate_estimated_time(num_variants, base_scenario.network.n)
         
         return {
-            "message": f"Started {num_variants} training simulations",
-            "variants": variant_runs,
-            "estimated_completion": f"{num_variants * 2} minutes"
+            "message": f"Training data generation started with {num_variants} variants",
+            "estimated_completion": estimated_time,
+            "status": "generating"
         }
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate training data: {str(e)}")
+
+
+@app.post("/api/auto-generate-training-data")
+async def auto_generate_training_data(background_tasks: BackgroundTasks):
+    """Automatically generate training data if insufficient."""
+    try:
+        # Check current status
+        status = training_generator.get_training_data_status()
+        
+        if status.total_simulations >= 50:
+            return {
+                "message": "Sufficient training data already exists",
+                "current_count": status.total_simulations,
+                "status": "sufficient"
+            }
+        
+        # Create a default base scenario for training
+        default_base_scenario = ScenarioRequest(
+            name="Auto Training Base",
+            description="Automatically generated base scenario for training",
+            network=NetworkConfig(
+                type="ws",
+                n=1000,  # Smaller for faster generation
+                k=6,
+                beta=0.1
+            ),
+            media_mix=MediaMix(
+                sns=MediaChannel(share=0.4, alpha=0.05),
+                video=MediaChannel(share=0.35, alpha=0.04),
+                search=MediaChannel(share=0.25, alpha=0.02)
+            ),
+            wom=WordOfMouthConfig(
+                p_generate=0.08,
+                decay=0.85
+            ),
+            personality=PersonalityConfig(
+                openness=0.6,
+                social_influence=0.5,
+                media_affinity=0.5,
+                risk_tolerance=0.4
+            ),
+            demographics=DemographicConfig(
+                age_group=3,
+                income_level=3,
+                urban_rural=0.7,
+                education_level=3
+            ),
+            influencers=InfluencerConfig(
+                enable_influencers=True,
+                influencer_ratio=0.02,
+                influence_multiplier=2.5
+            ),
+            steps=30,  # Shorter for faster generation
+            reps=3,    # Fewer repetitions
+            seed=42
+        )
+        
+        # Calculate how many variants we need
+        needed_variants = max(20, 50 - status.total_simulations)
+        
+        # Generate training data in background
+        async def run_auto_training():
+            return await training_generator.generate_training_data(default_base_scenario, needed_variants)
+        
+        background_tasks.add_task(run_auto_training)
+        
+        from ml.training_generator import calculate_estimated_time
+        estimated_time = calculate_estimated_time(needed_variants, 1000)
+        
+        return {
+            "message": f"Auto-generating {needed_variants} training variants",
+            "current_count": status.total_simulations,
+            "target_count": status.total_simulations + needed_variants,
+            "estimated_completion": estimated_time,
+            "status": "generating"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to auto-generate training data: {str(e)}")
+
+
+@app.get("/api/training-recommendations")
+async def get_training_recommendations():
+    """Get recommendations for improving training data."""
+    try:
+        status = training_generator.get_training_data_status()
+        
+        from ml.training_generator import get_training_recommendations
+        recommendations = get_training_recommendations(status.total_simulations)
+        
+        return {
+            "current_status": status.to_dict(),
+            "recommendations": recommendations,
+            "auto_generate_available": status.total_simulations < 50
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get recommendations: {str(e)}")
+
+
+@app.get("/api/demo-data-status")
+async def get_demo_data_status():
+    """Get status of demo data availability."""
+    try:
+        from demo_data.loader import demo_loader
+        status = demo_loader.get_data_status()
+        return status
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get demo data status: {str(e)}")
 
 
 @app.post("/api/competitor-analysis")
@@ -684,6 +740,220 @@ async def generate_ab_test_scenarios(request: dict):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"A/B test scenario generation failed: {str(e)}")
+
+
+# External Data Management Endpoints
+
+@app.get("/api/external-data/sources")
+async def get_external_data_sources():
+    """外部データソース一覧を取得"""
+    try:
+        async with external_data_manager as manager:
+            statuses = await manager.get_all_statuses()
+        
+        return {
+            "data_sources": [
+                {
+                    "type": status.source_type.value,
+                    "status": status.status,
+                    "last_sync": status.last_sync.isoformat() if status.last_sync else None,
+                    "error_message": status.error_message,
+                    "records_count": status.records_count
+                }
+                for status in statuses
+            ]
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get data sources: {str(e)}")
+
+
+@app.post("/api/external-data/config")
+async def update_external_data_config(request: dict):
+    """外部データソース設定を更新"""
+    try:
+        source_type = DataSourceType(request.get('source_type'))
+        config_updates = request.get('config', {})
+        
+        external_data_manager.update_api_config(source_type, **config_updates)
+        
+        return {
+            "message": f"Configuration updated for {source_type.value}",
+            "source_type": source_type.value,
+            "updated_fields": list(config_updates.keys())
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update configuration: {str(e)}")
+
+
+@app.post("/api/external-data/test-connection")
+async def test_external_connection(request: dict):
+    """外部データソース接続テスト"""
+    try:
+        source_type = DataSourceType(request.get('source_type'))
+        
+        async with external_data_manager as manager:
+            status = await manager.test_connection(source_type)
+        
+        return {
+            "source_type": status.source_type.value,
+            "status": status.status,
+            "error_message": status.error_message,
+            "last_sync": status.last_sync.isoformat() if status.last_sync else None,
+            "records_count": status.records_count
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Connection test failed: {str(e)}")
+
+
+@app.post("/api/external-data/upload")
+async def upload_external_file(
+    file: UploadFile = File(...),
+    data_mapping: str = Form(None)
+):
+    """外部データファイルをアップロード"""
+    try:
+        # ファイルデータを読み取り
+        file_content = await file.read()
+        
+        # ファイルをアップロード
+        upload_result = external_data_manager.upload_file(
+            file_content, 
+            file.filename,
+            file.content_type
+        )
+        
+        if not upload_result.get('success'):
+            raise HTTPException(status_code=400, detail=upload_result.get('error'))
+        
+        # データマッピングが提供された場合は適用
+        if data_mapping:
+            try:
+                import json
+                mapping_dict = json.loads(data_mapping)
+                load_result = external_data_manager.load_file_data(
+                    upload_result['file_path'],
+                    mapping_dict
+                )
+                upload_result['data_preview'] = load_result
+            except json.JSONDecodeError:
+                upload_result['mapping_error'] = "Invalid data mapping JSON"
+        
+        return {
+            "upload_result": upload_result,
+            "file_info": {
+                "filename": file.filename,
+                "content_type": file.content_type,
+                "size": len(file_content)
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
+
+
+@app.post("/api/external-data/load-file")
+async def load_external_file_data(request: dict):
+    """アップロードされたファイルからデータを読み込み"""
+    try:
+        file_path = request.get('file_path')
+        data_mapping = request.get('data_mapping', {})
+        
+        if not file_path:
+            raise HTTPException(status_code=400, detail="file_path is required")
+        
+        load_result = external_data_manager.load_file_data(file_path, data_mapping)
+        
+        if not load_result.get('success'):
+            raise HTTPException(status_code=400, detail=load_result.get('error'))
+        
+        return load_result
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"File data loading failed: {str(e)}")
+
+
+@app.get("/api/external-data/status")
+async def get_external_data_status():
+    """外部データ連携の全体状況を取得"""
+    try:
+        async with external_data_manager as manager:
+            statuses = await manager.get_all_statuses()
+        
+        # 統計情報を計算
+        total_sources = len(statuses)
+        connected_sources = len([s for s in statuses if s.status == "connected"])
+        error_sources = len([s for s in statuses if s.status == "error"])
+        disabled_sources = len([s for s in statuses if s.status == "disabled"])
+        
+        # 最新データの情報
+        latest_sync = None
+        total_records = 0
+        
+        for status in statuses:
+            if status.last_sync:
+                if not latest_sync or status.last_sync > latest_sync:
+                    latest_sync = status.last_sync
+            total_records += status.records_count
+        
+        return {
+            "summary": {
+                "total_sources": total_sources,
+                "connected_sources": connected_sources,
+                "error_sources": error_sources,
+                "disabled_sources": disabled_sources,
+                "connection_rate": connected_sources / total_sources if total_sources > 0 else 0,
+                "latest_sync": latest_sync.isoformat() if latest_sync else None,
+                "total_records": total_records
+            },
+            "sources": [
+                {
+                    "type": status.source_type.value,
+                    "status": status.status,
+                    "last_sync": status.last_sync.isoformat() if status.last_sync else None,
+                    "error_message": status.error_message,
+                    "records_count": status.records_count,
+                    "data_freshness": status.data_freshness.isoformat() if status.data_freshness else None
+                }
+                for status in statuses
+            ],
+            "recommendations": _get_data_source_recommendations(statuses)
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get external data status: {str(e)}")
+
+
+def _get_data_source_recommendations(statuses: list) -> list:
+    """データソースの推奨事項を生成"""
+    recommendations = []
+    
+    error_sources = [s for s in statuses if s.status == "error"]
+    if error_sources:
+        recommendations.append(f"{len(error_sources)}個のデータソースでエラーが発生しています。設定を確認してください。")
+    
+    disabled_sources = [s for s in statuses if s.status == "disabled"]
+    if disabled_sources:
+        recommendations.append(f"{len(disabled_sources)}個のデータソースが無効になっています。有効化を検討してください。")
+    
+    connected_sources = [s for s in statuses if s.status == "connected"]
+    if len(connected_sources) < 2:
+        recommendations.append("より多くのデータソースを接続することで、分析精度が向上します。")
+    
+    # データの新鮮さをチェック
+    from datetime import datetime, timedelta
+    stale_threshold = datetime.now() - timedelta(days=7)
+    stale_sources = [s for s in connected_sources if s.last_sync and s.last_sync < stale_threshold]
+    
+    if stale_sources:
+        recommendations.append(f"{len(stale_sources)}個のデータソースが1週間以上更新されていません。")
+    
+    if not recommendations:
+        recommendations.append("データソースの設定は良好です。")
+    
+    return recommendations
 
 
 if __name__ == "__main__":

@@ -208,26 +208,38 @@ export const AdvancedCalibration: React.FC<Props> = ({ scenario, onCalibratedSce
   const generateTrainingData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/generate-training-data', {
+      // Use auto-generate endpoint for better defaults
+      const response = await fetch('http://localhost:8000/api/auto-generate-training-data', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          base_scenario: scenario,
-          num_variants: 15
-        })
+        headers: { 'Content-Type': 'application/json' }
       });
       
       if (response.ok) {
         const data = await response.json();
-        alert(`${data.message}\n推定完了時間: ${data.estimated_completion}`);
-        // Refresh training data status after a delay
+        if (data.status === 'sufficient') {
+          alert('十分な訓練データが既に存在します');
+        } else {
+          alert(`${data.message}\n現在: ${data.current_count}シミュレーション\n目標: ${data.target_count}シミュレーション\n推定完了時間: ${data.estimated_completion}`);
+          
+          // Refresh training data status periodically
+          const refreshInterval = setInterval(() => {
+            fetchTrainingDataStatus();
+          }, 10000); // Check every 10 seconds
+          
+          // Stop refreshing after 5 minutes
+          setTimeout(() => {
+            clearInterval(refreshInterval);
+          }, 300000);
+        }
+        
+        // Immediate refresh
         setTimeout(() => {
           fetchTrainingDataStatus();
-        }, 5000);
+        }, 2000);
       }
     } catch (error) {
       console.error('Failed to generate training data:', error);
-      alert('トレーニングデータの生成に失敗しました');
+      alert('訓練データ生成に失敗しました');
     } finally {
       setIsLoading(false);
     }
@@ -634,13 +646,19 @@ export const AdvancedCalibration: React.FC<Props> = ({ scenario, onCalibratedSce
                   </div>
                   
                   {!trainingDataStatus.suitable_for_training && (
-                    <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <AlertTriangle className="h-5 w-5 text-yellow-600 mr-2" />
-                          <p className="text-sm text-yellow-800">
-                            より正確な最適化のため、追加のシミュレーション実行を推奨します
-                          </p>
+                    <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start">
+                          <AlertTriangle className="h-5 w-5 text-yellow-600 mr-3 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-medium text-yellow-800 mb-2">
+                              訓練データ不足: ML最適化の精度向上のため追加データが必要です
+                            </p>
+                            <p className="text-xs text-yellow-700">
+                              推奨: {trainingDataStatus.recommended_minimum}シミュレーション
+                              （現在: {trainingDataStatus.total_simulations}）
+                            </p>
+                          </div>
                         </div>
                         <button
                           onClick={generateTrainingData}
@@ -650,6 +668,20 @@ export const AdvancedCalibration: React.FC<Props> = ({ scenario, onCalibratedSce
                           {isLoading ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Database className="h-4 w-4 mr-2" />}
                           自動データ生成
                         </button>
+                      </div>
+                      <div className="mt-3 text-xs text-yellow-700">
+                        <strong>自動生成機能:</strong> 高速データ生成用に最適化されたパラメータでバックグラウンド実行
+                      </div>
+                    </div>
+                  )}
+                  
+                  {trainingDataStatus.suitable_for_training && (
+                    <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-md">
+                      <div className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                        <p className="text-sm text-green-800">
+                          十分な訓練データが利用可能です。ML最適化を実行できます。
+                        </p>
                       </div>
                     </div>
                   )}
