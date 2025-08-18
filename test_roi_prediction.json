@@ -1,0 +1,8 @@
+{
+  "media_mix": {
+    "sns": {"share": 0.4, "alpha": 0.05},
+    "video": {"share": 0.35, "alpha": 0.04},
+    "search": {"share": 0.25, "alpha": 0.02}
+  },
+  "total_budget": 1000000
+}

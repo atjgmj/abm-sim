@@ -1,0 +1,42 @@
+{
+  "base_scenario": {
+    "name": "Training Data Generation",
+    "media_mix": {
+      "sns": {"share": 0.4, "alpha": 0.05},
+      "video": {"share": 0.35, "alpha": 0.04},
+      "search": {"share": 0.25, "alpha": 0.02}
+    },
+    "wom": {
+      "p_generate": 0.1,
+      "decay": 0.8,
+      "personality_weight": 0.3,
+      "demographic_weight": 0.2
+    },
+    "network": {
+      "type": "ws",
+      "n": 500,
+      "k": 6,
+      "beta": 0.1
+    },
+    "personality": {
+      "openness": 0.5,
+      "social_influence": 0.6,
+      "media_affinity": 0.5,
+      "risk_tolerance": 0.4
+    },
+    "demographics": {
+      "age_group": 3,
+      "income_level": 3,
+      "urban_rural": 0.7,
+      "education_level": 3
+    },
+    "influencers": {
+      "enable_influencers": true,
+      "influencer_ratio": 0.02,
+      "influence_multiplier": 2.5
+    },
+    "steps": 20,
+    "reps": 2
+  },
+  "num_variants": 5
+}
